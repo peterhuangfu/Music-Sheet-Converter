@@ -1,2 +1,2 @@
-const server = require('./app').sevrer
+var server = require('./app').server
 server()
