@@ -1,6 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
+import Homepage from './views/homepage/index.vue'
+import Converter from './views/converter/index.vue'
+import Profile from './views/profile/index.vue'
+import Explore from './views/explore/index.vue'
+import Page from './components/page/index.vue'
 
 Vue.use(Router)
 
@@ -10,16 +14,35 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: Home
-    },
-    {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+      name: 'Page',
+      component: Page,
+      meta: { requiresAuth: false },
+      children: [
+        {
+          path: 'homepage',
+          name: 'homepage',
+          component: Homepage,
+          meta: { requiresAuth: true }
+        },
+        {
+          path: '/converter',
+          name: 'converter',
+          component: Converter,
+          meta: { requiresAuth: true }
+        },
+        {
+          path: '/profile',
+          name: 'profile',
+          component: Profile,
+          meta: { requiresAuth: true }
+        },
+        {
+          path: '/explore',
+          name: 'explore',
+          component: Explore,
+          meta: { requiresAuth: true }
+        }
+      ]
     }
   ]
 })
