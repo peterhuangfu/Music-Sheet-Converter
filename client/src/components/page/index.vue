@@ -93,7 +93,7 @@ export default {
 .main-content {
   will-change: padding-left;
   transition: padding-left 0.5s ease;
-  margin-top: 60px;
+  margin-top: 10px;
   width: 100vw;
 }
 </style>

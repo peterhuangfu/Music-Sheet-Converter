@@ -4,9 +4,10 @@
       :default-active="defaultActive"
       @select="onMenuSelected"
       mode="horizontal"
-      text-color="#255985"
-      active-text-color="#ffd04b"
+      text-color="black"
+      active-text-color="black"
     >
+      <span>dckdmi</span>
       <el-menu-item index="1">Home</el-menu-item>
       <el-menu-item index="2">Converter</el-menu-item>
       <el-menu-item index="3">Explore</el-menu-item>
