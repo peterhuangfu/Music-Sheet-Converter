@@ -71,7 +71,7 @@ exports.server = function() {
 
   mongoose.connect('mongodb+srv://huangfu:r980213r@sheet-converter-biuvl.gcp.mongodb.net/test?retryWrites=true&w=majority', config.dboptions)
   .then(res => {
-    console.log('mongo connection created'
+    console.log('mongo db connection created'
   )}
   )
 

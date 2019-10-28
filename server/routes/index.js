@@ -1,4 +1,5 @@
 const request = require("request-promise")
+const fs = require('fs')
 
 // var userRoute = require("./user")
 // var advertiserRoute = require("./advertiser")
@@ -29,6 +30,14 @@ module.exports = function(app) {
   app.get('/', (req, res) => {
     res.send('Hello World!')
   })
+
+  // app.get('/readpdf', (req, res) => {
+  //   const filePath = '/Users/huangfu/Downloads/ML/hw2/report.pdf'
+  //   fs.readFile(filePath , (err, data) => {
+  //     res.contentType('application/pdf')
+  //     res.send(data)
+  //   })
+  // })
 
   // app.get("/advertiser/overview",(req,res)=>{
   //  res.render("advertiser/overview")
