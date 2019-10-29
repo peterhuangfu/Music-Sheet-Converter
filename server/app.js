@@ -55,7 +55,7 @@ exports.server = function() {
     res.header('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS')
     res.header('Access-Control-Allow-Credentials', 'true')
     next()
-  });
+  })
 
   mongoose.connect('mongodb+srv://huangfu:r980213r@sheet-converter-biuvl.gcp.mongodb.net/test?retryWrites=true&w=majority', config.dboptions)
   .then(res => {
@@ -63,12 +63,12 @@ exports.server = function() {
   )}
   )
 
-  routes(app);
-  // all environments
+  routes(app)
 
   const server = http.createServer(app)
     .listen(app.get('port'), function() {
-      console.log('Express server listening on port ' + app.get('port'));
+      console.log('Express server listening on port ' + app.get('port'))
     })
+
   server.timeout = 1000000000
 }

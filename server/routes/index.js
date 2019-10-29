@@ -10,6 +10,7 @@ module.exports = function(app) {
     res.send('hello world.')
   })
 
-  app.get('/api/readpdf', wrap(exploreRoute.downloadPDF))
+  app.get('/api/downloadpdf', wrap(exploreRoute.downloadPDF))
+  app.get('/api/openpdf', wrap(exploreRoute.openPDF))
   app.post('/api/upload_mp3', convertRoute.saveMP3)
 }

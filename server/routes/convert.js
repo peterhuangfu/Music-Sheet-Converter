@@ -5,7 +5,12 @@ const fs = require('fs')
 const Busboy = require('busboy')
 
 exports.saveMP3 = async (req, res) => {
-  const busboy = new Busboy({ headers: req.headers })
+  const busboy = new Busboy({
+    headers: req.headers,
+    limits: {
+      fileSize: 50 * 1024 * 1024
+    }
+  })
 
   busboy.on('file', (fieldname, file, filename, encoding, mimetype) => {
     const file_path = '/Users/huangfu/Desktop/upload/' + filename
@@ -13,8 +18,7 @@ exports.saveMP3 = async (req, res) => {
   })
 
   busboy.on('finish', () => {
-    res.writeHead(200, { 'connection': 'close' })
-    res.end('complete')
+    res.status(200).send('complete')
   })
 
   return req.pipe(busboy)
