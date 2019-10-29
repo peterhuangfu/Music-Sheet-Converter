@@ -1,34 +1,39 @@
 const request = require('request-promise')
-const fs = require('fs')
 const exploreRoute = require('./explore')
+const convertRoute = require('./convert')
+const multer  = require('multer')
+const fs = require('fs')
+
+const storage = multer.diskStorage({
+  destination: function (req, file, callback) {
+    console.log(file.path)
+    callback(null, 'public/upload/')
+  },
+  filename: function (req, file, callback) {
+    callback(null, file.originalname)
+  }
+})
+
+// const fileFilter = function (req, file, callback) {
+//   if (file.mimetype === 'audio/mp3' || file.mimetype === 'audio/wav') {
+//     callback(null, true)
+//   }
+//   else {
+//     callback(new Error('File format should be MP3, WAV'), false)
+//   }
+// }
+ 
+const upload_music = multer({ storage: storage })
 
 const wrap = fn => (...args) => fn(...args).catch(args[2])
 
-const login_check = (req, res, next) => {
-  if(!req.session.current_user) {
-    return res.status(403).json({
-      error: 'Not Login'
-    })
-  }
-
-  //api user type check
-  const user_type = req.path.split("/")[2]
-  if(['advertiser', 'influencer'].indexOf(user_type) > -1 && req.session.current_user.user_type != user_type) {
-    return res.status(403).json({
-      message: 'Forbidden',
-      type: 'Forbidden'
-    })
-  }
-
-  return next()
-}
-
 module.exports = function(app) {
   app.get('/', (req, res) => {
-    res.send('Hello World!')
+    res.send('hello world.')
   })
 
-  app.get('/readpdf', wrap(exploreRoute.downloadPDF))
+  app.get('/api/readpdf', wrap(exploreRoute.downloadPDF))
+  app.post('/api/upload_mp3', convertRoute.saveMP3)
 
   // app.get("/advertiser/overview",(req,res)=>{
   //  res.render("advertiser/overview")
