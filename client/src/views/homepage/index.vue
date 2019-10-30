@@ -69,7 +69,7 @@
       <el-col :span="6">
         <div style="height:400px;backgroundColor:gray;"></div>
       </el-col>
-      <el-col :span="14">
+      <el-col :span="16">
         <div style="font-size:50px; text-align:center; margin:20px">Hsin-Ming Lu</div>
         <el-col :span="4">
           <div style="height:290px"></div>
@@ -80,9 +80,6 @@
         <el-col :span="4">
           <div style="height:290px"></div>
         </el-col>
-      </el-col>
-      <el-col :span="2">
-        <div style="height:400px"></div>
       </el-col>
     </el-row>
     <hr style="margin:25px"/>
