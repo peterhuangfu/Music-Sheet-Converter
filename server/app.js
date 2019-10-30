@@ -1,14 +1,13 @@
 const express = require('express')
 const session = require('express-session')
 const cookieParser = require('cookie-parser')
-// const serveStatic = require('serve-static')
+const serveStatic = require('serve-static')
 const bodyParser = require('body-parser')
 const errorhandler = require('errorhandler')
 const compression = require('compression')
 const morgan = require('morgan')
 const http = require('http')
-// const path = require('path')
-const busboy = require('connect-multiparty')
+const path = require('path')
 const methodOverride = require('method-override')
 const mongoose = require('mongoose')
 const routes = require('./routes')
@@ -21,7 +20,7 @@ mongoose.set('useCreateIndex', true)
 
 exports.server = function() {
   const app = express()
-  app.use(cookieParser("hagreanvaio"))
+  app.use(cookieParser('hagreanvaio'))
   
   if ('development' === app.get('env')) {
     app.use(errorhandler())
@@ -42,13 +41,6 @@ exports.server = function() {
   app.use(morgan('dev'))
   app.use(compression())
 
-  app.use(busboy({
-    highWaterMark: 2 * 1024 * 1024,
-    limits: {
-      fileSize: 10 * 1024 * 1024
-    }
-  }))
-
   app.use(bodyParser.json({ limit: '50mb' }))
   app.use(bodyParser.urlencoded({
     extended: true,
@@ -57,17 +49,13 @@ exports.server = function() {
   
   app.use(methodOverride('_method'))
 
-  // app.use(serveStatic(path.join(__dirname, 'public'), {
-  //   maxAge: 1000 * 60 * 60 * 24
-  // }))
-
   app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", config.client_host)
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
     res.header('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS')
     res.header('Access-Control-Allow-Credentials', 'true')
     next()
-  });
+  })
 
   mongoose.connect('mongodb+srv://huangfu:r980213r@sheet-converter-biuvl.gcp.mongodb.net/test?retryWrites=true&w=majority', config.dboptions)
   .then(res => {
@@ -75,12 +63,12 @@ exports.server = function() {
   )}
   )
 
-  routes(app);
-  // all environments
+  routes(app)
 
   const server = http.createServer(app)
     .listen(app.get('port'), function() {
-      console.log('Express server listening on port ' + app.get('port'));
+      console.log('Express server listening on port ' + app.get('port'))
     })
+
   server.timeout = 1000000000
 }
