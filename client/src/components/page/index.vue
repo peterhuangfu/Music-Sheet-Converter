@@ -10,10 +10,10 @@
         </el-col>
         <el-col :span="22">
           <div class="main-header">
-            <span
+            <!-- <span
               id="page_title"
               style="line-height:18px;font-size:18px; padding-left:8px; color: #255985"
-            >{{title}}</span>
+            >{{title}}</span> -->
           </div>
           <router-view style="margin-top:auto" />
         </el-col>
@@ -46,7 +46,7 @@ export default {
     title() {
       switch (this.$route.name) {
         case "homepage":
-          return "Homepage";
+          return "";
         case "profile":
           return "Profile";
         case "explore":
