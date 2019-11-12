@@ -37,13 +37,13 @@ export default {
       handler(newVal) {
         switch (newVal.path) {
           case "/explore":
-            this.defaultActive = "2";
-            break;
-          case "/profile":
             this.defaultActive = "3";
             break;
-          case "/converter":
+          case "/profile":
             this.defaultActive = "4";
+            break;
+          case "/converter":
+            this.defaultActive = "2";
             break;
           case "/homepage":
           default:
@@ -63,13 +63,13 @@ export default {
           this.$router.push("/homepage");
           break;
         case "2":
-          this.$router.push("/explore");
+          this.$router.push("/converter");
           break;
         case "3":
-          this.$router.push("/profile");
+          this.$router.push("/explore");
           break;
         case "4":
-          this.$router.push("/converter");
+          this.$router.push("/profile");
           break;
         default:
           this.$router.push("/");
