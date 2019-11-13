@@ -9,12 +9,6 @@
           <div class="main-header"></div>
         </el-col>
         <el-col :span="22">
-          <div class="main-header">
-            <!-- <span
-              id="page_title"
-              style="line-height:18px;font-size:18px; padding-left:8px; color: #255985"
-            >{{title}}</span> -->
-          </div>
           <router-view style="margin-top:auto" />
         </el-col>
         <el-col :span="1">
@@ -61,16 +55,6 @@ export default {
 };
 </script>
 <style lang="stylus" scoped>
-.owl-nav-header {
-  background-color: rgba(0, 0, 0, 0.8);
-  border: 0px;
-  z-index: 2001;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-}
-
 .side-bar {
   position: fixed;
   top: 60px;
@@ -81,7 +65,7 @@ export default {
 .main-header {
   background-color: rgba(0, 0, 0, 0);
   height: 51px;
-  padding-top: 16px;
+  padding-top: 1px;
   z-index: 2;
   position: relative;
 }
@@ -93,7 +77,7 @@ export default {
 .main-content {
   will-change: padding-left;
   transition: padding-left 0.5s ease;
-  margin-top: 10px;
+  margin-top: 1px;
   width: 100vw;
 }
 </style>
