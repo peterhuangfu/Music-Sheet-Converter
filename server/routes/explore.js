@@ -1,6 +1,7 @@
 const request = require('request-promise')
 const config = require('../../config')
 const ObjectId = require('mongoose').Types.ObjectId
+const path = require('path')
 const fs = require('fs')
 
 exports.downloadPDF = async (req, res) => {
@@ -16,15 +17,11 @@ exports.downloadPDF = async (req, res) => {
 }
 
 exports.openPDF = async (req, res) => {
-  const filePath = '/Users/huangfu/Downloads/ML/hw2/report.pdf'
+  const filePath = '../report.pdf'
   try {
-    await fs.readFileSync(filePath , (err, data) => {
-      if (err)
-        console.error(err)
-
-      res.contentType('application/pdf')
-      res.send(data)
-    })
+    const file = fs.readFileSync(path.join(__dirname, filePath))
+    res.contentType('application/pdf')
+    res.send(file)
   } catch (err) {
     res.status(403).json({
       message: 'open PDF file fail',

@@ -12,5 +12,5 @@ module.exports = function(app) {
 
   app.get('/api/downloadpdf', wrap(exploreRoute.downloadPDF))
   app.get('/api/openpdf', wrap(exploreRoute.openPDF))
-  app.post('/api/upload_mp3', convertRoute.saveMP3)
+  app.post('/api/convert', wrap(convertRoute.convert))
 }
