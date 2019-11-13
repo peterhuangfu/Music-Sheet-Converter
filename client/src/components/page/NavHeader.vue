@@ -7,12 +7,14 @@
       text-color="black"
       active-text-color="black"
     >
-      <span>dckdmi</span>
       <el-menu-item index="1">Home</el-menu-item>
       <el-menu-item index="2">Converter</el-menu-item>
       <el-menu-item index="3">Explore</el-menu-item>
       <el-menu-item index="4">Profile</el-menu-item>
     </el-menu>
+    <div
+      style="position: relative; top: -45px; left: 20px; color: #4DABED; font-size: 25px;width: 500px"
+    >Music Converter</div>
   </div>
 </template>
 
@@ -37,13 +39,13 @@ export default {
       handler(newVal) {
         switch (newVal.path) {
           case "/explore":
-            this.defaultActive = "2";
-            break;
-          case "/profile":
             this.defaultActive = "3";
             break;
-          case "/converter":
+          case "/profile":
             this.defaultActive = "4";
+            break;
+          case "/converter":
+            this.defaultActive = "2";
             break;
           case "/homepage":
           default:
@@ -62,13 +64,13 @@ export default {
         case "1":
           this.$router.push("/homepage");
           break;
-        case "2":
+        case "3":
           this.$router.push("/explore");
           break;
-        case "3":
+        case "4":
           this.$router.push("/profile");
           break;
-        case "4":
+        case "2":
           this.$router.push("/converter");
           break;
         default:
@@ -83,4 +85,9 @@ export default {
 };
 </script>
 
-<style scoped lang="stylus"></style>
+<style scoped lang="stylus">
+.el-menu {
+  display: flex;
+  justify-content: flex-end;
+}
+</style>
