@@ -47,6 +47,8 @@ export default {
           return "Explore";
         case "converter":
           return "Converter";
+        case "login":
+          return "Login";
         default:
           return "";
       }
