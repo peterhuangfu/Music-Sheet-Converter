@@ -23,7 +23,7 @@ export default {
       this.$gAuth.signIn()
       .then(GoogleUser => {
         this.isSignIn = this.$gAuth.isAuthorized
-        this.$store.dispatch('auth/SetUser', { user: GoogleUser })
+        this.$store.dispatch('auth/UserLogin', { token: GoogleUser.Zi.access_token, id: GoogleUser.El })
       })
       .catch(err => {
         console.error(err)

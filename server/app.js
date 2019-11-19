@@ -56,12 +56,11 @@ exports.server = function() {
     res.header('Access-Control-Allow-Credentials', 'true')
     next()
   })
-
+  
   mongoose.connect('mongodb+srv://huangfu:r980213r@sheet-converter-biuvl.gcp.mongodb.net/test?retryWrites=true&w=majority', config.dboptions)
   .then(res => {
-    console.log('mongo db connection created'
-  )}
-  )
+    console.log('mongo db connection created')
+  })
 
   routes(app)
 

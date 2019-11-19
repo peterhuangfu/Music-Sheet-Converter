@@ -7,7 +7,8 @@ const WorksSchema = Schema({
   description: String,
   uploader: { type: String, required: true },
   click_times: Number,
-  download_times: Number,
+  download_times: Number
+},  {
   collection: 'Works',
   timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }
 })

@@ -1,3 +1,5 @@
+import agent from './agent'
+
 const Auth = {
   namespaced: true,
   state: {
@@ -7,7 +9,7 @@ const Auth = {
   },
   mutations: {
     SET_USER (state, payload) {
-      state.user = payload.user.El
+      state.user = payload.user
       state.isAuthenticated = !!payload.user
     },
     CHECK_LOGIN_STATUS (state, payload) {
@@ -15,8 +17,14 @@ const Auth = {
     }
   },
   actions: {
-    SetUser ({ commit }, payload) {
-      commit('SET_USER', payload)
+    UserLogin ({ commit }, { token, id }) {
+      agent.post('login/google', { access_token: token, user_id: id })
+        .then(res => {
+          commit('SET_USER', res)
+        })
+        .catch(err => {
+          console.error(err)
+        })
     },
     CheckLoginStatus ({ commit }, payload) {
       commit('CHECK_LOGIN_STATUS', payload)
