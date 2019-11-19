@@ -1,9 +1,6 @@
 <template>
   <div>
     <button id="signinButton" @click="signin">Sign in with Google</button>
-    <p>{{ user }}</p>
-    <p>{{ isAuthenticated }}</p>
-    <p>Hello</p>
   </div>
 </template>
 
@@ -13,9 +10,9 @@ export default {
   name: "Login",
   computed: {
     ...mapState({
-      user: state => state.auth.user,
       isAuthenticated: state => state.auth.isAuthenticated,
-      isLoginCheck: state => state.auth.isLoginCheck
+      isLoginCheck: state => state.auth.isLoginCheck,
+      switch_judge: state => state.auth.switch_judge
     })
   },
   methods: {
@@ -29,8 +26,18 @@ export default {
         console.error(err)
       })
     }
+  },
+  watch: {
+    switch_judge: function (switch_judge) {
+      if (this.isAuthenticated)
+        this.$router.push('/')
+      else {
+        if (this.$router.history.current.path !== '/login')
+          this.$router.push('/login')
+      }
+    }
   }
-};
+}
 </script>
 
 <style lang="stylus" scoped>

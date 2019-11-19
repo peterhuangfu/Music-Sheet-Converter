@@ -17,7 +17,7 @@ export default new Router({
       path: '/',
       name: 'Page',
       component: Page,
-      meta: { requiresAuth: false },
+      meta: { requiresAuth: true },
       children: [
         {
           path: 'homepage',
@@ -42,14 +42,14 @@ export default new Router({
           name: 'explore',
           component: Explore,
           meta: { requiresAuth: true }
-        },
-        {
-          path: '/login',
-          name: 'login',
-          component: Login,
-          meta: { requiresAuth: true }
         }
       ]
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      component: Login,
+      meta: { requiresAuth: false }
     }
   ]
 })

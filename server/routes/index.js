@@ -14,5 +14,9 @@ module.exports = function(app) {
   app.get('/api/downloadpdf', wrap(exploreRoute.downloadPDF))
   app.get('/api/openpdf', wrap(exploreRoute.openPDF))
   app.post('/api/convert', wrap(convertRoute.convert))
+
+  // login
   app.post('/api/login/google', wrap(loginRoute.GoogleLogin))
+  app.get('/api/login/check_status', wrap(loginRoute.CheckLoginStatus))
+  app.get('/api/logout', wrap(loginRoute.Logout))
 }

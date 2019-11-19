@@ -20,6 +20,8 @@
 </template>
 <script>
 import NavHeader from "./NavHeader.vue";
+import { mapState, mapActions } from 'vuex';
+
 export default {
   name: "Page",
   components: {
@@ -30,6 +32,17 @@ export default {
   },
   destroyed() {
     window.removeEventListener("resize", this.resizeHandler);
+  },
+  beforeMount() {
+    if (!this.isLoginCheck) {
+      this.$store.dispatch('auth/CheckLoginStatus')
+    }
+    else {
+      if (this.isAuthenticated) {
+        if (this.$router.history.current.path !== '/')
+          this.$router.push('/')
+      }
+    }
   },
   methods: {
     resizeHandler() {
@@ -52,6 +65,21 @@ export default {
         default:
           return "";
       }
+    },
+    ...mapState({
+      isAuthenticated: state => state.auth.isAuthenticated,
+      isLoginCheck: state => state.auth.isLoginCheck,
+      switch_judge: state => state.auth.switch_judge
+    })
+  },
+  watch: {
+    switch_judge: function (switch_judge) {
+      if (this.isAuthenticated) {
+        if (this.$router.history.current.path !== '/')
+          this.$router.push('/')
+      }
+      else
+        this.$router.push('/login')
     }
   }
 };

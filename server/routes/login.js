@@ -57,3 +57,28 @@ exports.GoogleLogin = async (req, res) => {
 
   // console.log(OAuth2Client)
 }
+
+exports.CheckLoginStatus = async (req, res) => {
+  console.log(req.session.current_user)
+  if (req.session.current_user) {
+    return res.json({
+      message: 'login',
+      type: 'success',
+      user: req.session.current_user
+    })
+  }
+  else {
+    return res.json({
+      message: 'not_login',
+      type: 'fail'
+    })
+  }
+}
+
+exports.Logout = async (req, res) => {
+  req.session.destroy()
+  res.status(200).json({
+    message: 'logout',
+    type: 'success'
+  })
+}
