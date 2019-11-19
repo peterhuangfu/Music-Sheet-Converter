@@ -5,6 +5,7 @@ import Converter from './views/converter/index.vue'
 import Profile from './views/profile/index.vue'
 import Explore from './views/explore/index.vue'
 import Page from './components/page/index.vue'
+import Login from './views/login/index.vue'
 
 Vue.use(Router)
 
@@ -40,6 +41,12 @@ export default new Router({
           path: '/explore',
           name: 'explore',
           component: Explore,
+          meta: { requiresAuth: true }
+        },
+        {
+          path: '/login',
+          name: 'login',
+          component: Login,
           meta: { requiresAuth: true }
         }
       ]
