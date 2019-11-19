@@ -17,10 +17,10 @@ const Auth = {
     }
   },
   actions: {
-    UserLogin ({ commit }, { token, id }) {
-      agent.post('login/google', { access_token: token, user_id: id })
+    UserLogin ({ commit }, { user }) {
+      agent.post('login/google', { user: user })
         .then(res => {
-          commit('SET_USER', res)
+          commit('SET_USER', res.data)
         })
         .catch(err => {
           console.error(err)
