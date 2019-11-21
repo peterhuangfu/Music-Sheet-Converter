@@ -1,9 +1,6 @@
 <template>
   <div>
-    <button
-      @click="signin"
-      id="signinButton"
-    >Sign in with Google</button>
+    <button @click="signin" id="signinButton">Sign in with Google</button>
   </div>
 </template>
 
