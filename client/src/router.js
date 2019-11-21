@@ -43,13 +43,13 @@ export default new Router({
           component: Explore,
           meta: { requiresAuth: true },
         },
-        {
-          path: '/login',
-          name: 'login',
-          component: Login,
-          meta: { requiresAuth: true },
-        },
       ],
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      component: Login,
+      meta: { requiresAuth: false },
     },
   ],
 });

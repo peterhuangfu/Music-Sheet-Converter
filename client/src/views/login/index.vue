@@ -12,6 +12,7 @@ export default {
     ...mapState({
       isAuthenticated: state => state.auth.isAuthenticated,
       isLoginCheck: state => state.auth.isLoginCheck,
+      switch_judge: state => state.auth.switch_judge,
     }),
   },
   methods: {
@@ -20,14 +21,20 @@ export default {
         .signIn()
         .then(GoogleUser => {
           this.isSignIn = this.$gAuth.isAuthorized;
-          this.$store.dispatch('auth/UserLogin', {
-            token: GoogleUser.Zi.access_token,
-            id: GoogleUser.El,
-          });
+          this.$store.dispatch('auth/UserLogin', { user: GoogleUser });
         })
         .catch(err => {
           console.error(err);
         });
+    },
+  },
+  watch: {
+    switch_judge: function(switch_judge) {
+      if (this.isAuthenticated) this.$router.push('/');
+      else {
+        if (this.$router.history.current.path !== '/login')
+          this.$router.push('/login');
+      }
     },
   },
 };

@@ -42,9 +42,6 @@ export default {
       handler(newVal) {
         switch (newVal.path) {
           case '/explore':
-            this.defaultActive = '5';
-            break;
-          case '/explore':
             this.defaultActive = '3';
             break;
           case '/profile':
@@ -67,9 +64,6 @@ export default {
   methods: {
     onMenuSelected(index) {
       switch (index) {
-        case '5':
-          this.$router.push('login');
-          break;
         case '1':
           this.$router.push('/homepage');
           break;
@@ -92,6 +86,9 @@ export default {
     },
     resizeHandler() {
       this.windowWidth = window.innerWidth;
+    },
+    logout() {
+      this.$store.dispatch('auth/Logout', this.$router);
     },
   },
 };
