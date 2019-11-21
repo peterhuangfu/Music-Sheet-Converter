@@ -1,16 +1,8 @@
 const Profile = {
-  state: {
+  state: {},
+  mutations: {},
+  actions: {},
+  getters: {},
+};
 
-  },
-  mutations: {
-    
-  },
-  actions: {
-
-  },
-  getters: {
-    
-  }
-}
-
-export default Profile
+export default Profile;

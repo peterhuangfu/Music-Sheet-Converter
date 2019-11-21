@@ -3,7 +3,7 @@
 </template>
 <script>
 export default {
-  name: "Explore"
+  name: 'Explore',
 };
 </script>
 <style lang="stylus" scoped></style>

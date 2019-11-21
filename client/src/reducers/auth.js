@@ -1,38 +1,37 @@
-import agent from './agent'
+import agent from './agent';
 
 const Auth = {
   namespaced: true,
   state: {
     isLoginCheck: false,
     isAuthenticated: false,
-    user: {}
+    user: {},
   },
   mutations: {
-    SET_USER (state, payload) {
-      state.user = payload.user
-      state.isAuthenticated = !!payload.user
+    SET_USER(state, payload) {
+      state.user = payload.user;
+      state.isAuthenticated = !!payload.user;
     },
-    CHECK_LOGIN_STATUS (state, payload) {
-      state.isLoginCheck = !!payload.isAuthenticated
-    }
+    CHECK_LOGIN_STATUS(state, payload) {
+      state.isLoginCheck = !!payload.isAuthenticated;
+    },
   },
   actions: {
-    UserLogin ({ commit }, { token, id }) {
-      agent.post('login/google', { access_token: token, user_id: id })
+    UserLogin({ commit }, { token, id }) {
+      agent
+        .post('login/google', { access_token: token, user_id: id })
         .then(res => {
-          commit('SET_USER', res)
+          commit('SET_USER', res);
         })
         .catch(err => {
-          console.error(err)
-        })
+          console.error(err);
+        });
     },
-    CheckLoginStatus ({ commit }, payload) {
-      commit('CHECK_LOGIN_STATUS', payload)
-    }
+    CheckLoginStatus({ commit }, payload) {
+      commit('CHECK_LOGIN_STATUS', payload);
+    },
   },
-  getters: {
+  getters: {},
+};
 
-  }
-}
-
-export default Auth
+export default Auth;

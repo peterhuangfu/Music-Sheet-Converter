@@ -1,10 +1,10 @@
-import axios from 'axios'
+import axios from 'axios';
 
-const API_ROOT = 'http://localhost:4000' + '/api'
+const API_ROOT = 'http://localhost:4000' + '/api';
 
 const agent = axios.create({
   baseURL: API_ROOT,
-  withCredentials: true
-})
+  withCredentials: true,
+});
 
-export default agent
+export default agent;

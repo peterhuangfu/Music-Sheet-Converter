@@ -1,16 +1,8 @@
 const Explore = {
-  state: {
+  state: {},
+  mutations: {},
+  actions: {},
+  getters: {},
+};
 
-  },
-  mutations: {
-    
-  },
-  actions: {
-
-  },
-  getters: {
-    
-  }
-}
-
-export default Explore
+export default Explore;

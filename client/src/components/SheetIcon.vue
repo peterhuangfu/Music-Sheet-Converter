@@ -13,46 +13,46 @@
   </div>
 </template>
 <script>
-import IconMail from "./icons/IconMail.vue";
-import IconLeft from "./icons/IconLeft.vue";
-import IconRight from "./icons/IconRight.vue";
-import IconMenu from "./icons/IconMenu.vue";
+import IconMail from './icons/IconMail.vue';
+import IconLeft from './icons/IconLeft.vue';
+import IconRight from './icons/IconRight.vue';
+import IconMenu from './icons/IconMenu.vue';
 export default {
-  name: "SheetIcon",
+  name: 'SheetIcon',
   props: {
     icon: {
       type: String,
-      default: ""
+      default: '',
     },
     color: {
       type: String,
-      default: "white"
+      default: 'white',
     },
     size: {
       type: String,
-      default: "md",
-      validator: val => ["sm", "md", "lg"].includes(val)
+      default: 'md',
+      validator: val => ['sm', 'md', 'lg'].includes(val),
     },
     iconStyle: {
       type: String,
-      default: ""
-    }
+      default: '',
+    },
   },
   computed: {
     currentIcon() {
       switch (this.icon) {
-        case "mail":
+        case 'mail':
           return IconMail;
-        case "left":
+        case 'left':
           return IconLeft;
-        case "right":
+        case 'right':
           return IconRight;
-        case "menu":
+        case 'menu':
           return IconMenu;
         default:
-          return "";
+          return '';
       }
-    }
-  }
+    },
+  },
 };
 </script>

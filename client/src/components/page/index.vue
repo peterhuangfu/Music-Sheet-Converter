@@ -19,41 +19,41 @@
   </el-container>
 </template>
 <script>
-import NavHeader from "./NavHeader.vue";
+import NavHeader from './NavHeader.vue';
 export default {
-  name: "Page",
+  name: 'Page',
   components: {
-    NavHeader
+    NavHeader,
   },
   created() {
-    window.addEventListener("resize", this.resizeHandler);
+    window.addEventListener('resize', this.resizeHandler);
   },
   destroyed() {
-    window.removeEventListener("resize", this.resizeHandler);
+    window.removeEventListener('resize', this.resizeHandler);
   },
   methods: {
     resizeHandler() {
       this.windowWidth = window.innerWidth;
-    }
+    },
   },
   computed: {
     title() {
       switch (this.$route.name) {
-        case "homepage":
-          return "";
-        case "profile":
-          return "Profile";
-        case "explore":
-          return "Explore";
-        case "converter":
-          return "Converter";
-        case "login":
-          return "Login";
+        case 'homepage':
+          return '';
+        case 'profile':
+          return 'Profile';
+        case 'explore':
+          return 'Explore';
+        case 'converter':
+          return 'Converter';
+        case 'login':
+          return 'Login';
         default:
-          return "";
+          return '';
       }
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="stylus" scoped>

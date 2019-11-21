@@ -1,14 +1,14 @@
 <template>
   <div>
     <el-row>
-        <div class="homepage_blockone_bgcolor">
+      <div class="homepage_blockone_bgcolor">
         <div class="title1">
           Sound Separation And
         </div>
         <div class="title2">
           Sheet Transformation
         </div>
-        </div>
+      </div>
     </el-row>
     <el-row>
       <el-col :span="12">
@@ -18,49 +18,93 @@
       </el-col>
       <el-col :span="12">
         <div class="homepage_blocktwo_bgcolor"></div>
-        <div style="z-index:0"><img src="../../picture/keyboard.png" class="keyboard"></div>
+        <div style="z-index:0">
+          <img src="../../picture/keyboard.png" class="keyboard" />
+        </div>
       </el-col>
     </el-row>
-    <hr/>
+    <hr />
     <el-row>
-      <div style="font-size:50px; text-align:center; margin: 20px">Introdunction</div>
+      <div style="font-size:50px; text-align:center; margin: 20px">
+        Introdunction
+      </div>
       <div style="height:500px; backgroundColor:gray;"></div>
     </el-row>
-    <hr style="margin:25px"/>
+    <hr style="margin:25px" />
     <el-row>
       <div style="height:680px; backgroundColor:black;">
-        <div style="font-size:50px; text-align:center; color:white; padding-top:20px">Member</div>
+        <div
+          style="font-size:50px; text-align:center; color:white; padding-top:20px"
+        >
+          Member
+        </div>
         <el-row style="margin-top:20px">
           <el-col :span="8">
-            <div style="width:200px; height:200px; backgroundColor:white; margin-left:27%"></div>
-            <div style="font-size:30px; color:white;margin-left:40%;margin-top:20px">蔡涵如</div>
+            <div
+              style="width:200px; height:200px; backgroundColor:white; margin-left:27%"
+            ></div>
+            <div
+              style="font-size:30px; color:white;margin-left:40%;margin-top:20px"
+            >
+              蔡涵如
+            </div>
           </el-col>
           <el-col :span="8">
-            <div style="width:200px; height:200px; backgroundColor:white; margin-left:27%"></div>
-            <div style="font-size:30px; color:white;margin-left:42%;margin-top:20px">鄭  揚</div>
+            <div
+              style="width:200px; height:200px; backgroundColor:white; margin-left:27%"
+            ></div>
+            <div
+              style="font-size:30px; color:white;margin-left:42%;margin-top:20px"
+            >
+              鄭 揚
+            </div>
           </el-col>
           <el-col :span="8">
-            <div style="width:200px; height:200px; backgroundColor:white; margin-left:27%"></div>
-            <div style="font-size:30px; color:white;margin-left:40%;margin-top:20px">林建鋐</div>
+            <div
+              style="width:200px; height:200px; backgroundColor:white; margin-left:27%"
+            ></div>
+            <div
+              style="font-size:30px; color:white;margin-left:40%;margin-top:20px"
+            >
+              林建鋐
+            </div>
           </el-col>
         </el-row>
         <el-row style="margin-top:20px">
           <el-col :span="8">
-            <div style="width:200px; height:200px; backgroundColor:white; margin-left:27%"></div>
-            <div style="font-size:30px; color:white;margin-left:36%;margin-top:20px">皇甫立翔</div>
+            <div
+              style="width:200px; height:200px; backgroundColor:white; margin-left:27%"
+            ></div>
+            <div
+              style="font-size:30px; color:white;margin-left:36%;margin-top:20px"
+            >
+              皇甫立翔
+            </div>
           </el-col>
           <el-col :span="8">
-            <div style="width:200px; height:200px; backgroundColor:white; margin-left:27%"></div>
-            <div style="font-size:30px; color:white;margin-left:40%;margin-top:20px">顏价廷</div>
+            <div
+              style="width:200px; height:200px; backgroundColor:white; margin-left:27%"
+            ></div>
+            <div
+              style="font-size:30px; color:white;margin-left:40%;margin-top:20px"
+            >
+              顏价廷
+            </div>
           </el-col>
           <el-col :span="8">
-            <div style="width:200px; height:200px; backgroundColor:white; margin-left:27%"></div>
-            <div style="font-size:30px; color:white;margin-left:40%;margin-top:20px">劉韋成</div>
+            <div
+              style="width:200px; height:200px; backgroundColor:white; margin-left:27%"
+            ></div>
+            <div
+              style="font-size:30px; color:white;margin-left:40%;margin-top:20px"
+            >
+              劉韋成
+            </div>
           </el-col>
         </el-row>
       </div>
     </el-row>
-    <hr style="margin:25px"/>
+    <hr style="margin:25px" />
     <el-row>
       <div style="font-size:50px; text-align:center;">Professor</div>
       <el-col :span="2">
@@ -70,7 +114,9 @@
         <div style="height:400px;backgroundColor:gray;"></div>
       </el-col>
       <el-col :span="16">
-        <div style="font-size:50px; text-align:center; margin:20px">Hsin-Ming Lu</div>
+        <div style="font-size:50px; text-align:center; margin:20px">
+          Hsin-Ming Lu
+        </div>
         <el-col :span="4">
           <div style="height:290px"></div>
         </el-col>
@@ -82,10 +128,14 @@
         </el-col>
       </el-col>
     </el-row>
-    <hr style="margin:25px"/>
+    <hr style="margin:25px" />
     <el-row>
       <div style="height:450px; backgroundColor:black;">
-        <div style="font-size:50px; text-align:center; color:white; padding-top:20px">Source</div>
+        <div
+          style="font-size:50px; text-align:center; color:white; padding-top:20px"
+        >
+          Source
+        </div>
         <el-col :span="2">
           <div style="height:270px;backgroundColor:black;margin-top:20px"></div>
         </el-col>
@@ -113,14 +163,11 @@
       <hr/>
       esdnk
     </el-row> -->
-    
-    
-    
   </div>
 </template>
 <script>
 export default {
-  name: "Homepage"
+  name: 'Homepage',
 };
 </script>
 <style lang="stylus" scoped>
@@ -147,7 +194,7 @@ export default {
 }
 .homepage_button_1 {
   background-color: black
-  color: white 
+  color: white
   font-size : 40px
   width:250px
   height:75px

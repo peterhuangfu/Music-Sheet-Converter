@@ -1,16 +1,8 @@
 const Homepage = {
-  state: {
+  state: {},
+  mutations: {},
+  actions: {},
+  getters: {},
+};
 
-  },
-  mutations: {
-    
-  },
-  actions: {
-
-  },
-  getters: {
-    
-  }
-}
-
-export default Homepage
+export default Homepage;

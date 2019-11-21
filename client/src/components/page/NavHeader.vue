@@ -15,80 +15,82 @@
     </el-menu>
     <div
       style="position: relative; top: -45px; left: 20px; color: #4DABED; font-size: 25px;width: 500px"
-    >Music Converter</div>
+    >
+      Music Converter
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "SideBar",
+  name: 'SideBar',
   data() {
     return {
       windowWidth: window.innerWidth,
-      defaultActive: "1"
+      defaultActive: '1',
     };
   },
   created() {
-    window.addEventListener("resize", this.resizeHandler);
+    window.addEventListener('resize', this.resizeHandler);
   },
   destroyed() {
-    window.removeEventListener("resize", this.resizeHandler);
+    window.removeEventListener('resize', this.resizeHandler);
   },
   watch: {
     $route: {
       immediate: true,
       handler(newVal) {
         switch (newVal.path) {
-          case "/explore":
-            this.defaultActive = "5";
+          case '/explore':
+            this.defaultActive = '5';
             break;
-          case "/explore":
-            this.defaultActive = "3";
+          case '/explore':
+            this.defaultActive = '3';
             break;
-          case "/profile":
-            this.defaultActive = "4";
+          case '/profile':
+            this.defaultActive = '4';
             break;
-          case "/converter":
-            this.defaultActive = "2";
+          case '/converter':
+            this.defaultActive = '2';
             break;
-          case "/homepage":
+          case '/homepage':
           default:
-            this.defaultActive = "1";
+            this.defaultActive = '1';
             break;
         }
-      }
+      },
     },
     windowWidth(newVal) {
       this.isCollapse = newVal < 1100;
-    }
+    },
   },
   methods: {
     onMenuSelected(index) {
       switch (index) {
-        case "5":
-          this.$router.push("login");
+        case '5':
+          this.$router.push('login');
           break;
-        case "1":
-          this.$router.push("/homepage");
+        case '1':
+          this.$router.push('/homepage');
           break;
-        case "3":
-          this.$router.push("/explore");
+        case '3':
+          this.$router.push('/explore');
           break;
-        case "4":
-          this.$router.push("/profile");
+        case '4':
+          this.$router.push('/profile');
           break;
-        case "2":
-          this.$router.push("/converter");
+        case '2':
+          this.$router.push('/converter');
           break;
         default:
-          this.$router.push("/");
+          this.$router.push('/');
           break;
       }
     },
     resizeHandler() {
       this.windowWidth = window.innerWidth;
-    }
-  }
+    },
+  },
 };
 </script>
 

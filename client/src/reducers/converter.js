@@ -1,16 +1,8 @@
 const Converter = {
-  state: {
+  state: {},
+  mutations: {},
+  actions: {},
+  getters: {},
+};
 
-  },
-  mutations: {
-    
-  },
-  actions: {
-
-  },
-  getters: {
-    
-  }
-}
-
-export default Converter
+export default Converter;
