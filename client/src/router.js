@@ -17,7 +17,7 @@ export default new Router({
       path: '/',
       name: 'Page',
       component: Page,
-      meta: { requiresAuth: false },
+      meta: { requiresAuth: true },
       children: [
         {
           path: 'homepage',

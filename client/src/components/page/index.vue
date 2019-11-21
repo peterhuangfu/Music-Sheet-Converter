@@ -31,6 +31,15 @@ export default {
   destroyed() {
     window.removeEventListener('resize', this.resizeHandler);
   },
+  beforeMount() {
+    if (!this.isLoginCheck) {
+      this.$store.dispatch('auth/CheckLoginStatus');
+    } else {
+      if (this.isAuthenticated) {
+        if (this.$router.history.current.path !== '/') this.$router.push('/');
+      }
+    }
+  },
   methods: {
     resizeHandler() {
       this.windowWidth = window.innerWidth;
@@ -57,29 +66,25 @@ export default {
 };
 </script>
 <style lang="stylus" scoped>
-.side-bar {
-  position: fixed;
-  top: 60px;
-  bottom: 0;
-  z-index: 7;
-}
+.side-bar
+  position fixed
+  top 60px
+  bottom 0
+  z-index 7
 
-.main-header {
-  background-color: rgba(0, 0, 0, 0);
-  height: 51px;
-  padding-top: 1px;
-  z-index: 2;
-  position: relative;
-}
+.main-header
+  background-color rgba(0, 0, 0, 0)
+  height 51px
+  padding-top 1px
+  z-index 2
+  position relative
 
-.main-header svg, span {
-  color: #36445D;
-}
+.main-header svg, span
+  color #36445D
 
-.main-content {
-  will-change: padding-left;
-  transition: padding-left 0.5s ease;
-  margin-top: 1px;
-  width: 100vw;
-}
+.main-content
+  will-change padding-left
+  transition padding-left 0.5s ease
+  margin-top 1px
+  width 100vw
 </style>

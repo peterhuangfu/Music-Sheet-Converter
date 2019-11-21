@@ -1,9 +1,9 @@
 <template>
   <div>
-    <button id="signinButton" @click="signin">Sign in with Google</button>
-    <p>{{ user }}</p>
-    <p>{{ isAuthenticated }}</p>
-    <p>Hello</p>
+    <button
+      @click="signin"
+      id="signinButton"
+    >Sign in with Google</button>
   </div>
 </template>
 
@@ -13,7 +13,6 @@ export default {
   name: 'Login',
   computed: {
     ...mapState({
-      user: state => state.auth.user,
       isAuthenticated: state => state.auth.isAuthenticated,
       isLoginCheck: state => state.auth.isLoginCheck,
     }),

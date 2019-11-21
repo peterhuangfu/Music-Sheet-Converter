@@ -3,21 +3,17 @@
     <el-menu
       :default-active="defaultActive"
       @select="onMenuSelected"
+      active-text-color="black"
       mode="horizontal"
       text-color="black"
-      active-text-color="black"
     >
       <el-menu-item index="1">Home</el-menu-item>
       <el-menu-item index="2">Converter</el-menu-item>
       <el-menu-item index="3">Explore</el-menu-item>
       <el-menu-item index="4">Profile</el-menu-item>
-      <el-menu-item index="5">Login</el-menu-item>
+      <el-menu-item index="5">Logout</el-menu-item>
     </el-menu>
-    <div
-      style="position: relative; top: -45px; left: 20px; color: #4DABED; font-size: 25px;width: 500px"
-    >
-      Music Converter
-    </div>
+    <div style="position: relative; top: -45px; left: 20px; color: #4DABED; font-size: 25px;width: 500px">Music Converter</div>
   </div>
 </template>
 
@@ -82,6 +78,9 @@ export default {
         case '2':
           this.$router.push('/converter');
           break;
+        case '5':
+          this.logout();
+          break;
         default:
           this.$router.push('/');
           break;
@@ -95,8 +94,7 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-.el-menu {
-  display: flex;
-  justify-content: flex-end;
-}
+.el-menu
+  display flex
+  justify-content flex-end
 </style>

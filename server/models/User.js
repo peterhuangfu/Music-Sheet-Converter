@@ -5,10 +5,13 @@ const UserSchema = Schema({
   google_id: { type: String, unique: true },
   username: { type: String, required: true },
   name: String,
+  email: String,
   profile_picture_url: String,
-  birthday: Date,
   upload_works: [{ type: Schema.Types.ObjectId, ref: 'Works' }],
   download_works: [{ type: Schema.Types.ObjectId, ref: 'Works' }],
+  google_token: String,
+  google_token_type: String,
+  google_token_update_date: Date,
   sign_up_date: Date
 },  {
   collection: 'User',
