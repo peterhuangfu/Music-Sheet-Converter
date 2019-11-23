@@ -6,7 +6,7 @@ const WorksSchema = Schema({
   file_path: { type: String, unique: true, required: true },
   title: { type: String, required: true },
   description: String,
-  uploader: { type: String, required: true },
+  uploader: { type: Schema.Types.ObjectId, ref: 'User' },
   click_times: Number,
   download_times: Number
 },  {

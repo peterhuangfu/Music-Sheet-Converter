@@ -68,7 +68,7 @@ const Auth = {
         .get('logout')
         .then(res => {
           commit('LOGOUT');
-          history.push('/login');
+          history.push('/');
         })
         .catch(err => {
           console.error(err);

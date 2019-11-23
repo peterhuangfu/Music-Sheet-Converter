@@ -62,7 +62,7 @@ exports.GoogleLogin = async (req, res) => {
 }
 
 exports.CheckLoginStatus = async (req, res) => {
-  console.log(req.session.current_user)
+  // console.log(req.session.current_user)
   if (req.session.current_user) {
     return res.json({
       message: 'login',
