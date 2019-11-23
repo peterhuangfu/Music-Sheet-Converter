@@ -15,12 +15,18 @@ export default new Router({
   routes: [
     {
       path: '/',
+      name: 'Login',
+      component: Login,
+      meta: { requiresAuth: false },
+    },
+    {
+      path: '/page',
       name: 'Page',
       component: Page,
       meta: { requiresAuth: true },
       children: [
         {
-          path: 'homepage',
+          path: '/homepage',
           name: 'homepage',
           component: Homepage,
           meta: { requiresAuth: true },
@@ -44,12 +50,6 @@ export default new Router({
           meta: { requiresAuth: true },
         },
       ],
-    },
-    {
-      path: '/login',
-      name: 'Login',
-      component: Login,
-      meta: { requiresAuth: false },
     },
   ],
 });

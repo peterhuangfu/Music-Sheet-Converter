@@ -8,6 +8,15 @@
 import { mapState, mapActions } from 'vuex';
 export default {
   name: 'Login',
+  beforeMount() {
+    if (!this.isLoginCheck) {
+      this.$store.dispatch('auth/CheckLoginStatus');
+    } else {
+      if (this.isAuthenticated) {
+        if (this.$router.history.current.path !== '/') this.$router.push('/');
+      }
+    }
+  },
   computed: {
     ...mapState({
       isAuthenticated: state => state.auth.isAuthenticated,
@@ -30,10 +39,10 @@ export default {
   },
   watch: {
     switch_judge: function(switch_judge) {
-      if (this.isAuthenticated) this.$router.push('/');
+      if (this.isAuthenticated) this.$router.push('/page');
       else {
-        if (this.$router.history.current.path !== '/login')
-          this.$router.push('/login');
+        if (this.$router.history.current.path !== '/')
+          this.$router.push('/');
       }
     },
   },
