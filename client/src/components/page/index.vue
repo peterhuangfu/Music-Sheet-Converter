@@ -37,7 +37,8 @@ export default {
       this.$store.dispatch('auth/CheckLoginStatus');
     } else {
       if (this.isAuthenticated) {
-        if (this.$router.history.current.path !== '/page') this.$router.push('/page');
+        if (this.$router.history.current.path !== '/page')
+          this.$router.push('/page');
       }
     }
   },
@@ -72,7 +73,8 @@ export default {
   watch: {
     switch_judge: function(switch_judge) {
       if (this.isAuthenticated) {
-        if (this.$router.history.current.path !== '/page') this.$router.push('/page');
+        if (this.$router.history.current.path !== '/page')
+          this.$router.push('/page');
       } else this.$router.push('/');
     },
   },

@@ -19,14 +19,14 @@ export default {
     //   this.$store.dispatch('explore/get_profile');
     // }
     ...mapActions({
-      getProfile: 'get_profile'
-    })
+      getProfile: 'get_profile',
+    }),
   },
   watch: {
     information: function(information) {
-      console.log(information)
-    }
-  }
+      console.log(information);
+    },
+  },
 };
 </script>
 <style lang="stylus" scoped></style>
