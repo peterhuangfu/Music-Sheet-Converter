@@ -8,7 +8,8 @@ const WorksSchema = Schema({
   description: String,
   uploader: { type: Schema.Types.ObjectId, ref: 'User' },
   click_times: Number,
-  download_times: Number
+  download_times: Number,
+  ispublic: Boolean
 },  {
   collection: 'Works',
   timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }

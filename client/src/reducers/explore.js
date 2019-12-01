@@ -1,6 +1,7 @@
 import agent from './agent';
 
 const Explore = {
+  namespaced: true,
   state: {
     information: '',
   },
@@ -10,9 +11,9 @@ const Explore = {
     },
   },
   actions: {
-    get_profile({ commit }) {
+    getProfile({ commit }, { text }) {
       agent
-        .get('profile/get_profile')
+        .post('explore/convert', { text: text })
         .then(res => {
           commit('NOOT', res.data);
         })

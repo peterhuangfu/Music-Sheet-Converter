@@ -3,15 +3,6 @@ const config = require('../../config')
 const ObjectId = require('mongoose').Types.ObjectId
 const { google } = require('googleapis')
 const User = require('../models/User')
-// const OAuth2 = google.auth.OAuth2
-// const OAuth2Client = new OAuth2(config.OAUTH2_CLIENT_ID, config.OAUTH2_CLIENT_SECRET, config.OAUTH2_CALLBACK)
-// const scopes = [
-//   'https://www.googleapis.com/auth/contacts.readonly'
-// ]
-// const url = OAuth2Client.generateAuthUrl({
-//   access_type: 'offline',
-//   scope: scopes
-// })
 
 exports.GoogleLogin = async (req, res) => {
   const user = req.body.user
@@ -50,15 +41,6 @@ exports.GoogleLogin = async (req, res) => {
     message: 'success login',
     user: req.session.current_user
   })
-
-  // const baseUrl = 'https://people.googleapis.com/v1/people/me?personFields=names,emailAddresses'
-
-  // OAuth2Client.getToken(code, (err, tokens) => {
-  //   if (!err)
-  //     OAuth2Client.setCredentials(tokens)
-  // })
-
-  // console.log(OAuth2Client)
 }
 
 exports.CheckLoginStatus = async (req, res) => {

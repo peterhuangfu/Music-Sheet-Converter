@@ -16,10 +16,10 @@ export default {
   },
   methods: {
     // getProfile() {
-    //   this.$store.dispatch('explore/get_profile');
+    //   this.$store.dispatch('explore/getProfile', { text: 'helllllo' });
     // }
     ...mapActions({
-      getProfile: 'get_profile',
+      getProfile: 'getProfile',
     }),
   },
   watch: {

@@ -12,9 +12,13 @@ module.exports = function(app) {
     res.send('hello world.')
   })
 
+  // explore and about pdf
   app.get('/api/explore/downloadpdf', wrap(exploreRoute.downloadPDF))
   app.get('/api/explore/openpdf', wrap(exploreRoute.openPDF))
-  app.post('/api/explore/convert', wrap(convertRoute.convert))
+
+  // convert
+  app.post('/api/convert/music', wrap(convertRoute.convert_for_music))
+  app.post('/api/convert/information', wrap(convertRoute.convert_for_music_information))
 
   // login
   app.post('/api/login/google', wrap(loginRoute.GoogleLogin))
