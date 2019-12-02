@@ -33,7 +33,7 @@ exports.GoogleLogin = async (req, res) => {
   }
   else {
     const access_token = user.Zi.access_token
-    await User.updateOne({ _id: current_user._id },{ $set:{ google_token: access_token, google_token_update_date: new Date() } })
+    await User.updateOne({ _id: ObjectId(current_user._id) },{ $set:{ google_token: access_token, google_token_update_date: new Date() } })
     req.session.current_user = current_user.toObject()
   }
 

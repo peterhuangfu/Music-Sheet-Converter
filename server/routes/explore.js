@@ -12,8 +12,8 @@ exports.downloadPDF = async (req, res) => {
   try {
     await User.findOne({ google_id: user.google_id }, { $push: { download_works: pdf_id } })
 
-    work = await Works.findOne({ _id: pdf_id }, { download_times: 1 })
-    await Works.updateOne({ _id: pdf_id }, { $set: { download_times: work.download_times+1 } })
+    work = await Works.findOne({ _id: ObjectId(pdf_id) }, { download_times: 1 })
+    await Works.updateOne({ _id: ObjectId(pdf_id) }, { $set: { download_times: work.download_times+1 } })
 
     await res.download(filePath)
 
@@ -31,8 +31,8 @@ exports.openPDF = async (req, res) => {
   // const filePath = '/Users/huangfu/Downloads/ML/hw2/report.pdf'
 
   try {
-    work = await Works.findOne({ _id: pdf_id }, { click_times: 1 })
-    await Works.updateOne({ _id: pdf_id }, { $set: { click_times: work.click_times+1 } })
+    work = await Works.findOne({ _id: ObjectId(pdf_id) }, { click_times: 1 })
+    await Works.updateOne({ _id: ObjectId(pdf_id) }, { $set: { click_times: work.click_times+1 } })
 
     const file = fs.readFileSync(filePath)
     res.contentType('application/pdf')
