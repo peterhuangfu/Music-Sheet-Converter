@@ -3,6 +3,22 @@ const config = require('../../config')
 const ObjectId = require('mongoose').Types.ObjectId
 const path = require('path')
 const fs = require('fs')
+const User = require('../models/User')
+const Works = require('../models/Works')
+
+exports.getPublicPDF = async (req, res) => {
+  try {
+    all_works = await Works.find({ ispublic: true })
+
+    res.status(200).send(all_works)
+
+  } catch (err) {
+    res.status(403).json({
+      message: 'get works fail',
+      type: 'fail'
+    })
+  }
+}
 
 exports.downloadPDF = async (req, res) => {
   const user = req.session.current_user
