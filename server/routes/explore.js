@@ -2,15 +2,40 @@ const request = require('request-promise')
 const config = require('../../config')
 const ObjectId = require('mongoose').Types.ObjectId
 const path = require('path')
+const moment = require('moment')
 const fs = require('fs')
 const User = require('../models/User')
 const Works = require('../models/Works')
 
 exports.getPublicPDF = async (req, res) => {
   try {
-    all_works = await Works.find({ ispublic: true })
+    const time_range = parseInt(req.query.time_range)
 
-    res.status(200).send(all_works)
+    const time_to = new Date(moment().format('YYYY-MM-DD HH:mm:ss'))
+    const time_from = new Date(moment().subtract(time_range, 'd').format('YYYY-MM-DD HH:mm:ss'))
+    
+    if (time_range !== 0) {
+      all_works = await Works.find({
+        ispublic: true,
+        created_at : { 
+          $lt: time_to, 
+          $gte: time_from
+        }
+      }).lean()
+    }
+    else {
+      all_works = await Works.find({ ispublic: true }).lean()
+    }
+
+    all_works.forEach(e => {
+      const uploader = ObjectId(e.uploader)
+      const user = await User.findOne({ _id: uploader }, { username: 1 })
+      e.uploader = user.username
+    })
+
+    const response = all_works
+    
+    res.status(200).send(response)
 
   } catch (err) {
     res.status(403).json({

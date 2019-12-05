@@ -1,8 +1,8 @@
 <template>
   <div>
     this is Explore
-    <button @click="getProfile">get profile</button>
-    {{ information }}
+    <button @click="getAllWorks">get all works</button>
+    {{ works }}
   </div>
 </template>
 <script>
@@ -11,20 +11,20 @@ export default {
   name: 'Explore',
   computed: {
     ...mapState({
-      information: state => state.explore.information,
+      works: state => state.explore.works,
     }),
   },
   methods: {
-    // getProfile() {
-    //   this.$store.dispatch('explore/getProfile', { text: 'helllllo' });
-    // }
-    ...mapActions({
-      getProfile: 'getProfile',
-    }),
+    getAllWorks() {
+      this.$store.dispatch('explore/getAllWorks', { time_range: '7' });
+    }
+    // ...mapActions({
+    //   getAllWorks: 'explore/getAllWorks',
+    // }),
   },
   watch: {
-    information: function(information) {
-      console.log(information);
+    works: function(works) {
+      console.log(works);
     },
   },
 };

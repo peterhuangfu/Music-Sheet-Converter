@@ -1,4 +1,5 @@
 const Homepage = {
+  namespaced: true,
   state: {},
   mutations: {},
   actions: {},

@@ -4,16 +4,17 @@ const Explore = {
   namespaced: true,
   state: {
     information: '',
+    works: [],
   },
   mutations: {
     NOOT(state, payload) {
-      state.information = payload;
+      state.works = payload;
     },
   },
   actions: {
-    getProfile({ commit }, { text }) {
+    getAllWorks({ commit }, { time_range }) {
       agent
-        .post('explore/convert', { text: text })
+        .get(`explore/getPublicPDF?time_range=${time_range}`)
         .then(res => {
           commit('NOOT', res.data);
         })

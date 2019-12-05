@@ -1,4 +1,5 @@
 const Profile = {
+  namespaced: true,
   state: {},
   mutations: {},
   actions: {},

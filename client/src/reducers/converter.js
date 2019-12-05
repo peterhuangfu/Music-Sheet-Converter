@@ -1,4 +1,5 @@
 const Converter = {
+  namespaced: true,
   state: {},
   mutations: {},
   actions: {},
