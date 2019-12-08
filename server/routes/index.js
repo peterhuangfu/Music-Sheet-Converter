@@ -14,8 +14,8 @@ module.exports = function(app) {
 
   // explore and about pdf
   app.get('/api/explore/getPublicPDF', wrap(exploreRoute.getPublicPDF))
-  app.get('/api/explore/downloadpdf', wrap(exploreRoute.downloadPDF))
-  app.get('/api/explore/openpdf', wrap(exploreRoute.openPDF))
+  app.post('/api/explore/downloadpdf', wrap(exploreRoute.downloadPDF))
+  app.post('/api/explore/openpdf', wrap(exploreRoute.openPDF))
 
   // convert
   app.post('/api/convert/music', wrap(convertRoute.convert_for_music))

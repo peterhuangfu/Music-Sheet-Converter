@@ -17,24 +17,29 @@ exports.getPublicPDF = async (req, res) => {
     if (time_range !== 0) {
       all_works = await Works.find({
         ispublic: true,
-        created_at : { 
-          $lt: time_to, 
-          $gte: time_from
-        }
+        // created_at : { 
+        //   $lt: time_to, 
+        //   $gte: time_from
+        // }
       }).lean()
     }
     else {
       all_works = await Works.find({ ispublic: true }).lean()
     }
 
-    all_works.forEach(e => {
+    for (e of all_works) {
       const uploader = ObjectId(e.uploader)
       const user = await User.findOne({ _id: uploader }, { username: 1 })
       e.uploader = user.username
-    })
+    }
 
-    const response = all_works
+    // all_works.forEach(async e => {
+    //   const uploader = ObjectId(e.uploader)
+    //   const user = await User.findOne({ _id: uploader }, { username: 1 })
+    //   e.uploader = user.username
+    // })
     
+    const response = all_works    
     res.status(200).send(response)
 
   } catch (err) {
@@ -46,17 +51,20 @@ exports.getPublicPDF = async (req, res) => {
 }
 
 exports.downloadPDF = async (req, res) => {
-  const user = req.session.current_user
+  const current_user = req.session.current_user
   const pdf_id = req.body.pdf_id
-  const filePath = req.body.file_path
+  // const filePath = req.body.file_path
+  const filePath = '/Users/huangfu/Downloads/ML/hw2/report.pdf'
   
   try {
-    await User.findOne({ google_id: user.google_id }, { $push: { download_works: pdf_id } })
-
+    await User.updateOne({ google_id: current_user.google_id }, { $push: { download_works: ObjectId(pdf_id) } })
     work = await Works.findOne({ _id: ObjectId(pdf_id) }, { download_times: 1 })
     await Works.updateOne({ _id: ObjectId(pdf_id) }, { $set: { download_times: work.download_times+1 } })
 
-    await res.download(filePath)
+    // await res.download(filePath)
+    const file = fs.readFileSync(filePath)
+    res.contentType('application/pdf')
+    res.send(file)
 
   } catch (err) {
     res.status(403).json({
@@ -68,8 +76,8 @@ exports.downloadPDF = async (req, res) => {
 
 exports.openPDF = async (req, res) => {
   const pdf_id = req.body.pdf_id
-  const filePath = req.body.file_path
-  // const filePath = '/Users/huangfu/Downloads/ML/hw2/report.pdf'
+  // const filePath = req.body.file_path
+  const filePath = '/Users/huangfu/Downloads/ML/hw2/report.pdf'
 
   try {
     work = await Works.findOne({ _id: ObjectId(pdf_id) }, { click_times: 1 })
