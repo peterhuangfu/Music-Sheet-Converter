@@ -85,10 +85,6 @@ export default {
           this.$router.push('/explore');
       } else this.$router.push('/');
     },
-    open_work: function(work) {
-      // console.log(work)
-      window.open('../../assets/report.pdf')
-    },
   },
 };
 </script>

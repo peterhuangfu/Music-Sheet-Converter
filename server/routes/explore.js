@@ -57,7 +57,12 @@ exports.downloadPDF = async (req, res) => {
   const filePath = '/Users/huangfu/Downloads/ML/hw2/report.pdf'
   
   try {
-    await User.updateOne({ google_id: current_user.google_id }, { $push: { download_works: ObjectId(pdf_id) } })
+    let user_had_download = await User.findOne({ google_id: current_user.google_id }, { download_works: 1 })
+    user_had_download = user_had_download.download_works
+    
+    if (!user_had_download.includes(pdf_id))
+      await User.updateOne({ google_id: current_user.google_id }, { $push: { download_works: ObjectId(pdf_id) } })
+      
     work = await Works.findOne({ _id: ObjectId(pdf_id) }, { download_times: 1 })
     await Works.updateOne({ _id: ObjectId(pdf_id) }, { $set: { download_times: work.download_times+1 } })
 

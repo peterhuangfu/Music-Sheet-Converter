@@ -11,12 +11,6 @@ const Explore = {
     GETWORKS(state, payload) {
       state.works = payload;
     },
-    OPENPDF(state, payload) {
-      state.openWork = payload;
-    },
-    DOWNLOADPDF(state, payload) {
-      console.log('download success !');
-    },
   },
   actions: {
     getAllWorks({ commit }, { time_range }) {
@@ -31,9 +25,19 @@ const Explore = {
     },
     openWork({ commit }, { _id, path }) {
       agent
-        .post('explore/openpdf', { pdf_id: _id, file_path: path })
+        .post(
+          'explore/openpdf',
+          { pdf_id: _id, file_path: path },
+          { responseType: 'blob' }
+        )
         .then(res => {
-          commit('OPENPDF', res.data);
+          var fileURL = window.URL.createObjectURL(
+            new Blob([res.data], {
+              type: 'application/pdf',
+            })
+          );
+          var fileLink = document.createElement('a');
+          window.open(fileURL);
         })
         .catch(err => {
           console.error(err);
@@ -59,7 +63,6 @@ const Explore = {
           document.body.appendChild(fileLink);
 
           fileLink.click();
-          // commit('DOWNLOADPDF');
         })
         .catch(err => {
           console.error(err);
