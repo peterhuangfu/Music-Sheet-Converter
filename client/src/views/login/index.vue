@@ -55,7 +55,7 @@ export default {
     if (!this.isLoginCheck) {
       this.$store.dispatch('auth/CheckLoginStatus');
     } else {
-      if (this.isAuthenticated) {
+      if (!this.isAuthenticated) {
         if (this.$router.history.current.path !== '/') this.$router.push('/');
       }
     }
@@ -82,7 +82,7 @@ export default {
   },
   watch: {
     switch_judge: function(switch_judge) {
-      if (this.isAuthenticated) this.$router.push('/page');
+      if (this.isAuthenticated) this.$router.push('/homepage');
       else {
         if (this.$router.history.current.path !== '/') this.$router.push('/');
       }

@@ -15,7 +15,7 @@ const Explore = {
   actions: {
     getAllWorks({ commit }, { time_range }) {
       agent
-        .get(`explore/getPublicPDF?time_range=${time_range}`)
+        .get(`explore/getPublicWorks?time_range=${time_range}`)
         .then(res => {
           commit('GETWORKS', res.data);
         })
@@ -23,11 +23,11 @@ const Explore = {
           console.error(err);
         });
     },
-    openWork({ commit }, { _id, path }) {
+    openPortfolio({ commit }, { _id, path }) {
       agent
         .post(
           'explore/openpdf',
-          { pdf_id: _id, file_path: path },
+          { pdf_id: _id, pdf_file_path: path },
           { responseType: 'blob' }
         )
         .then(res => {
@@ -43,11 +43,11 @@ const Explore = {
           console.error(err);
         });
     },
-    downloadWork({ commit }, { _id, path }) {
+    downloadPortfolio({ commit }, { _id, path }) {
       agent
         .post(
           'explore/downloadpdf',
-          { pdf_id: _id, file_path: path },
+          { pdf_id: _id, pdf_file_path: path },
           { responseType: 'blob' }
         )
         .then(res => {
@@ -59,7 +59,57 @@ const Explore = {
           var fileLink = document.createElement('a');
 
           fileLink.href = fileURL;
-          fileLink.setAttribute('download', 'download.pdf');
+          fileLink.setAttribute('download', 'sheet.pdf');
+          document.body.appendChild(fileLink);
+
+          fileLink.click();
+        })
+        .catch(err => {
+          console.error(err);
+        });
+    },
+    downloadSepPiano({ commit }, { _id, path }) {
+      agent
+        .post(
+          'explore/download_sep_piano',
+          { pdf_id: _id, sep_piano_path: path },
+          { responseType: 'blob' }
+        )
+        .then(res => {
+          var fileURL = window.URL.createObjectURL(
+            new Blob([res.data], {
+              type: 'application/octet-stream',
+            })
+          );
+          var fileLink = document.createElement('a');
+
+          fileLink.href = fileURL;
+          fileLink.setAttribute('download', 'seperated-piano.mp3');
+          document.body.appendChild(fileLink);
+
+          fileLink.click();
+        })
+        .catch(err => {
+          console.error(err);
+        });
+    },
+    downloadSepHuman({ commit }, { _id, path }) {
+      agent
+        .post(
+          'explore/download_sep_human',
+          { pdf_id: _id, sep_human_path: path },
+          { responseType: 'blob' }
+        )
+        .then(res => {
+          var fileURL = window.URL.createObjectURL(
+            new Blob([res.data], {
+              type: 'application/octet-stream',
+            })
+          );
+          var fileLink = document.createElement('a');
+
+          fileLink.href = fileURL;
+          fileLink.setAttribute('download', 'seperated-human.mp3');
           document.body.appendChild(fileLink);
 
           fileLink.click();

@@ -36,10 +36,14 @@ export default {
     if (!this.isLoginCheck) {
       this.$store.dispatch('auth/CheckLoginStatus');
     } else {
-      if (this.isAuthenticated) {
-        if (this.$router.history.current.path !== '/page')
-          this.$router.push('/page');
-      }
+      // if (this.isAuthenticated) {
+      //   if (this.$router.history.current.path !== '/homepage')
+      //     this.$router.push('/homepage');
+      // }
+      // else
+      //   this.$router.push('/');
+      if (!this.isAuthenticated)
+        this.$router.push('/');
     }
   },
   methods: {
@@ -51,7 +55,7 @@ export default {
     title() {
       switch (this.$route.name) {
         case 'homepage':
-          return '';
+          return 'Homepage';
         case 'profile':
           return 'Profile';
         case 'explore':
@@ -72,10 +76,15 @@ export default {
   },
   watch: {
     switch_judge: function(switch_judge) {
-      if (this.isAuthenticated) {
-        if (this.$router.history.current.path !== '/page')
-          this.$router.push('/page');
-      } else this.$router.push('/');
+      // if (this.isAuthenticated) {
+      //   if (this.$router.history.current.path !== '/homepage')
+      //     this.$router.push('/homepage');
+      // } else this.$router.push('/');
+      if (!this.isLoginCheck)
+        this.$store.dispatch('auth/CheckLoginStatus');
+      else
+        if (!this.isAuthenticated)
+          this.$router.push('/');
     },
   },
 };

@@ -20,7 +20,10 @@ exports.convert_for_music_information = async (req, res) => {
     await save_music_information(req, res)
 
   } catch (err) {
-    console.error(err)
+    res.status(403).json({
+      message: 'save information fail',
+      type: 'fail'
+    })
   }
 }
 
@@ -62,24 +65,32 @@ const save_music_information = async (req, res) => {
   const work_id = ObjectId()
   const this_id = works_num + 1
   const file_path = req.body.file_path
-  const new_path = file_path.substr(0, file_path.length()-4) + '.pdf'
 
   const newWork = new Works({
     _id: work_id,
     file_id: this_id.toString(),
-    file_path: new_path,
+    pdf_file_path: '',
+    sep_piano_path: '',
+    sep_human_path: '',
     title: req.body.title,
     description: req.body.description,
     uploader: ObjectId(req.session.current_user._id),
     click_times: 0,
     download_times: 0,
+    seperate: req.body.isseperate,
+    convert: req.body.isconvert,
     public: req.body.ispublic
   })
 
   await newWork.save()
   await User.updateOne({ google_id: req.session.current_user.google_id }, { $push: { upload_works: work_id } })
 
-  call_sheep_server(req.body.file_path)
+  res.status(200).json({
+    message: 'save information success',
+    type: 'success'
+  })
+
+  call_sheep_server(file_path)
 }
 
 const call_sheep_server = async (path) => {

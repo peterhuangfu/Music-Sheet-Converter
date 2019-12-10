@@ -7,7 +7,7 @@ const fs = require('fs')
 const User = require('../models/User')
 const Works = require('../models/Works')
 
-exports.getPublicPDF = async (req, res) => {
+exports.getPublicWorks = async (req, res) => {
   try {
     const time_range = parseInt(req.query.time_range)
 
@@ -53,8 +53,8 @@ exports.getPublicPDF = async (req, res) => {
 exports.downloadPDF = async (req, res) => {
   const current_user = req.session.current_user
   const pdf_id = req.body.pdf_id
-  // const filePath = req.body.file_path
-  const filePath = '/Users/huangfu/Downloads/ML/hw2/report.pdf'
+  const filePath = req.body.pdf_file_path
+  // const filePath = '/Users/huangfu/Downloads/ML/hw2/report.pdf'
   
   try {
     let user_had_download = await User.findOne({ google_id: current_user.google_id }, { download_works: 1 })
@@ -66,7 +66,6 @@ exports.downloadPDF = async (req, res) => {
     work = await Works.findOne({ _id: ObjectId(pdf_id) }, { download_times: 1 })
     await Works.updateOne({ _id: ObjectId(pdf_id) }, { $set: { download_times: work.download_times+1 } })
 
-    // await res.download(filePath)
     const file = fs.readFileSync(filePath)
     res.contentType('application/pdf')
     res.send(file)
@@ -81,8 +80,8 @@ exports.downloadPDF = async (req, res) => {
 
 exports.openPDF = async (req, res) => {
   const pdf_id = req.body.pdf_id
-  // const filePath = req.body.file_path
-  const filePath = '/Users/huangfu/Downloads/ML/hw2/report.pdf'
+  const filePath = req.body.pdf_file_path
+  // const filePath = '/Users/huangfu/Downloads/ML/hw2/report.pdf'
 
   try {
     work = await Works.findOne({ _id: ObjectId(pdf_id) }, { click_times: 1 })
@@ -98,4 +97,42 @@ exports.openPDF = async (req, res) => {
       type: 'fail'
     })
   } 
+}
+
+exports.downloadSepPiano = async (req, res) => {
+  const current_user = req.session.current_user
+  const pdf_id = req.body.pdf_id
+  const filePath = req.body.sep_piano_path
+  // const filePath = '/Users/huangfu/Desktop/upload/123.mp3'
+  
+  try {
+    const file = fs.readFileSync(filePath)
+    res.contentType('application/octet-stream')
+    res.send(file)
+
+  } catch (err) {
+    res.status(403).json({
+      message: 'download seperated piano file fail',
+      type: 'fail'
+    })
+  }
+}
+
+exports.downloadSepHuman = async (req, res) => {
+  const current_user = req.session.current_user
+  const pdf_id = req.body.pdf_id
+  const filePath = req.body.sep_human_path
+  // const filePath = '/Users/huangfu/Desktop/upload/123.mp3'
+  
+  try {
+    const file = fs.readFileSync(filePath)
+    res.contentType('application/octet-stream')
+    res.send(file)
+
+  } catch (err) {
+    res.status(403).json({
+      message: 'download seperated human file fail',
+      type: 'fail'
+    })
+  }
 }
