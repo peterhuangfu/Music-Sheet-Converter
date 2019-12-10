@@ -19,31 +19,21 @@
                   Upload File
                 </div>
                 <el-upload
-                  class="upload-demo"
-                  drag
-                  action="https://jsonplaceholder.typicode.com/posts/"
-                  :file-list="FileList"
-                  style="margin-left: 8%; margin-top: 50px"
-                  :auto-upload="false"
-                  multiple
+                class="upload-demo"
+                drag
+                accept=".wav, .mp3"
+                action="https://jsonplaceholder.typicode.com/posts/"
+                :on-change="fileChange"
+                style="margin-left: 8%; margin-top: 50px"
+                :auto-upload="false"
+                name="file"
                 >
-                  <i class="el-icon-upload"></i>
-                  <div style="fontSize: 20px; color: gray; text-align:center">
-                    click or drag to upload
-                  </div>
-                  <div
-                    style="fontSize: 15px; color: white; margin-top:12px"
-                    slot="tip"
-                  >
-                    .wav and .mp3 only
-                  </div>
-                </el-upload>
+                <i class="el-icon-upload"></i>
+                <div style="fontSize: 20px; color: gray; text-align:center">click or drag to upload</div>
+                <div style="fontSize: 15px; color: white; margin-top:12px" slot="tip">.wav and .mp3 only</div>
+              </el-upload>
                 <div style="text-align:center">
-                  <el-button
-                    circle
-                    @change="changeColor"
-                    style="background-color:red; margin-top:20px; margin-right:0%"
-                  >
+                  <el-button circle id="fileCircle" v-bind:style="{backgroundColor: greenOrRed}">
                   </el-button>
                 </div>
               </el-col>
@@ -100,14 +90,14 @@
                   <div style="color: white; fontSize: 25px;">Separate</div>
                 </el-col>
                 <el-col :span="12">
-                  <el-button
+                  <!-- <el-button
                     icon="el-icon-search"
                     circle
                     size="mini"
                     style="background-color:gray; color:white; margin-top:6px"
                     disabled
                   >
-                  </el-button>
+                  </el-button> -->
                 </el-col>
               </el-row>
               <el-row>
@@ -124,13 +114,36 @@
                   <div style="color: white; fontSize: 25px;">Public</div>
                 </el-col>
                 <el-col :span="12">
-                  <el-button
+                  <!-- <el-button
                     icon="el-icon-search"
                     circle
                     size="mini"
                     style="background-color:gray; color:white; margin-top:6px"
                   >
-                  </el-button>
+                  </el-button> -->
+                </el-col>
+              </el-row>
+              <el-row>
+                <el-col :span="4">
+                  <el-switch
+                    v-model="form.wantToTransform"
+                    active-color="#13ce66"
+                    inactive-color="#888888"
+                    style="margin-top:9px;"
+                  >
+                  </el-switch>
+                </el-col>
+                <el-col :span="8">
+                  <div style="color: white; fontSize: 25px;">Transform</div>
+                </el-col>
+                <el-col :span="12">
+                  <!-- <el-button
+                    icon="el-icon-search"
+                    circle
+                    size="mini"
+                    style="background-color:gray; color:white; margin-top:6px"
+                  >
+                  </el-button> -->
                 </el-col>
               </el-row>
               <el-button class="homepage_button_1" @click="onSubmit"
@@ -147,6 +160,7 @@
   </div>
 </template>
 <script>
+import { mapState, mapActions } from 'vuex';
 export default {
   name: 'Converter',
   data() {
@@ -154,17 +168,72 @@ export default {
       form: {
         fileName: '',
         fileDescrip: '',
-        isSeparate: '',
-        isPublic: '',
+        isSeparate: false,
+        isPublic: false,
+        wantToTransform: false,
+        formData:new FormData(),
       },
+      existFile : "red",
       FileList: [],
     };
   },
-  methods: {
-    onSubmit() {},
-    clear() {},
-    changeColor() {},
+  created() {
+    window.addEventListener('resize', this.resizeHandler);
   },
+  destroyed() {
+    window.removeEventListener('resize', this.resizeHandler);
+  },
+  beforeMount() {
+    if (!this.isLoginCheck) {
+      this.$store.dispatch('auth/CheckLoginStatus');
+    } else {
+      if (this.isAuthenticated) {
+        if (this.$router.history.current.path !== '/converter')
+          this.$router.push('/converter');
+      }
+    }
+  },
+  computed: {
+    ...mapState({
+      works: state => state.converter.works,
+      isAuthenticated: state => state.auth.isAuthenticated,
+      isLoginCheck: state => state.auth.isLoginCheck,
+      switch_judge: state => state.auth.switch_judge,
+    }),
+    greenOrRed: function () {
+        return this.existFile;
+    }
+  },
+  watch: {
+    works: function(works) {
+      console.log('Get Works !');
+    },
+    switch_judge: function(switch_judge) {
+      if (this.isAuthenticated) {
+        if (this.$router.history.current.path !== '/converter')
+          this.$router.push('/converter');
+      } else this.$router.push('/');
+    },
+  },
+  // computed: {
+  //    greenOrRed: function () {
+  //     return this.existFile;
+  //   }
+  // },
+  methods: {
+    onSubmit () {
+      this.$store.dispatch('converter/save_music_information', { path: "test", 
+      file_title: this.form.fileName, file_description: this.form.fileDescrip, file_ispublic: this.form.isPublic });
+    },
+    clear () {
+      this.form.fileName = '';
+      this.form.fileDescrip = '';
+      this.existFile = "red";
+    },
+    fileChange(e) {
+      this.existFile = "green";
+    }
+  }
 };
 </script>
 <style lang="stylus" scoped>
@@ -179,5 +248,9 @@ export default {
   width:150px
   height:40px
   margin-top: 20px
+}
+#fileCircle {
+  margin-top:20px
+  margin-right:0%
 }
 </style>
