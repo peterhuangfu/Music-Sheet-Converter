@@ -28,6 +28,8 @@ exports.convert_for_music_information = async (req, res) => {
 }
 
 const save_music_file = async (req, res) => {
+  // add console.log to print formData  
+  // console.log(req.body.file) 
   const busboy = new Busboy({
     headers: req.headers,
     limits: {

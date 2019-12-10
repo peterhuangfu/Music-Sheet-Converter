@@ -174,7 +174,6 @@ export default {
         formData:new FormData(),
       },
       existFile : "red",
-      FileList: [],
     };
   },
   created() {
@@ -222,8 +221,11 @@ export default {
   // },
   methods: {
     onSubmit () {
-      this.$store.dispatch('converter/save_music_information', { path: "test", 
-      file_title: this.form.fileName, file_description: this.form.fileDescrip, file_ispublic: this.form.isPublic });
+      if (this.form.fileName !== "" && this.form.fileDescrip !== "")
+        this.$store.dispatch('converter/save_music_information', {title: this.form.fileName, 
+        description: this.form.fileDescrip, ispublic: this.form.isPublic, isseparate: this.form.isSeparate,
+        isconvert: this.form.wantToTransform });
+      this.$store.dispatch('converter/save_music_file', {file: this.form.formData});
     },
     clear () {
       this.form.fileName = '';
@@ -232,6 +234,7 @@ export default {
     },
     fileChange(e) {
       this.existFile = "green";
+      this.form.formData = e;
     }
   }
 };
