@@ -18,6 +18,8 @@ import IconLeft from './icons/IconLeft.vue';
 import IconRight from './icons/IconRight.vue';
 import IconMenu from './icons/IconMenu.vue';
 import IconGoogle from './icons/IconGoogle.vue';
+import IconEye from './icons/IconEye.vue';
+import IconDownload from './icons/IconDownload.vue';
 export default {
   name: 'SheetIcon',
   props: {
@@ -52,6 +54,10 @@ export default {
           return IconMenu;
         case 'google':
           return IconGoogle;
+        case 'eye':
+          return IconEye;
+        case 'download':
+          return IconDownload;
         default:
           return '';
       }
