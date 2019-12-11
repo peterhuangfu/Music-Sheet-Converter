@@ -17,11 +17,7 @@ exports.get_profile = async (req, res) => {
   }
 
   for (e of user.download_works) {
-<<<<<<< HEAD
     e.uploader = current_user.username;
-=======
-    e.uploader = current_user.username
->>>>>>> 1a8f4b2ce6669bfaf48845347e1ff860848c84a2
   }
 
   const response = user;
