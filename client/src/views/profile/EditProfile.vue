@@ -1,5 +1,11 @@
 <template>
-  <el-dialog :visible.sync="dialogVisible" center height="210px" top="109px" width="456px">
+  <el-dialog
+    :visible.sync="dialogVisible"
+    center
+    height="210px"
+    top="109px"
+    width="456px"
+  >
     <div class="dialog-title">Edit Profile</div>
     <div class="edit">
       <div>Your Name:</div>
@@ -17,7 +23,9 @@
       <div>Your Address:</div>
       <el-input v-model="editUserAddr"></el-input>
     </div>
-    <div style="width:228px;display:flex; justify-content:flex-end;margin:auto;margin-top:16px;">
+    <div
+      style="width:228px;display:flex; justify-content:flex-end;margin:auto;margin-top:16px;"
+    >
       <el-button @click="editProfile">Confirm</el-button>
     </div>
   </el-dialog>

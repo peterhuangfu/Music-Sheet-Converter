@@ -42,8 +42,7 @@ export default {
       // }
       // else
       //   this.$router.push('/');
-      if (!this.isAuthenticated)
-        this.$router.push('/');
+      if (!this.isAuthenticated) this.$router.push('/');
     }
   },
   methods: {
@@ -80,11 +79,8 @@ export default {
       //   if (this.$router.history.current.path !== '/homepage')
       //     this.$router.push('/homepage');
       // } else this.$router.push('/');
-      if (!this.isLoginCheck)
-        this.$store.dispatch('auth/CheckLoginStatus');
-      else
-        if (!this.isAuthenticated)
-          this.$router.push('/');
+      if (!this.isLoginCheck) this.$store.dispatch('auth/CheckLoginStatus');
+      else if (!this.isAuthenticated) this.$router.push('/');
     },
   },
 };

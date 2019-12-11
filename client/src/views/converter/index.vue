@@ -19,21 +19,32 @@
                   Upload File
                 </div>
                 <el-upload
-                class="upload-demo"
-                drag
-                accept=".wav, .mp3"
-                action="https://jsonplaceholder.typicode.com/posts/"
-                :on-change="fileChange"
-                style="margin-left: 8%; margin-top: 50px"
-                :auto-upload="false"
-                name="file"
+                  class="upload-demo"
+                  drag
+                  accept=".wav, .mp3"
+                  action="https://jsonplaceholder.typicode.com/posts/"
+                  :on-change="fileChange"
+                  style="margin-left: 8%; margin-top: 50px"
+                  :auto-upload="false"
+                  name="file"
                 >
-                <i class="el-icon-upload"></i>
-                <div style="fontSize: 20px; color: gray; text-align:center">click or drag to upload</div>
-                <div style="fontSize: 15px; color: white; margin-top:12px" slot="tip">.wav and .mp3 only</div>
-              </el-upload>
+                  <i class="el-icon-upload"></i>
+                  <div style="fontSize: 20px; color: gray; text-align:center">
+                    click or drag to upload
+                  </div>
+                  <div
+                    style="fontSize: 15px; color: white; margin-top:12px"
+                    slot="tip"
+                  >
+                    .wav and .mp3 only
+                  </div>
+                </el-upload>
                 <div style="text-align:center">
-                  <el-button circle id="fileCircle" v-bind:style="{backgroundColor: greenOrRed}">
+                  <el-button
+                    circle
+                    id="fileCircle"
+                    v-bind:style="{ backgroundColor: greenOrRed }"
+                  >
                   </el-button>
                 </div>
               </el-col>
@@ -171,9 +182,9 @@ export default {
         isSeparate: false,
         isPublic: false,
         wantToTransform: false,
-        formData:new FormData(),
+        formData: new FormData(),
       },
-      existFile : "red",
+      existFile: 'red',
     };
   },
   created() {
@@ -200,9 +211,9 @@ export default {
       isLoginCheck: state => state.auth.isLoginCheck,
       switch_judge: state => state.auth.switch_judge,
     }),
-    greenOrRed: function () {
-        return this.existFile;
-    }
+    greenOrRed: function() {
+      return this.existFile;
+    },
   },
   watch: {
     switch_judge: function(switch_judge) {
@@ -213,24 +224,36 @@ export default {
     },
   },
   methods: {
-    onSubmit () {
-      if (this.form.fileTitle !== "" && this.form.fileDescrip !== "" && this.existFile === true )
-        this.$store.dispatch('converter/save_music_file', {file: this.form.formData});
-        if (this.file_path !== "" && this.file_name !== "")
-          this.$store.dispatch('converter/save_music_information', {title: this.form.fileTitle, 
-          description: this.form.fileDescrip, ispublic: this.form.isPublic, isseparate: this.form.isSeparate,
-          isconvert: this.form.wantToTransform, file_path: this.file_path, file_name: this.file_name });
+    onSubmit() {
+      if (
+        this.form.fileTitle !== '' &&
+        this.form.fileDescrip !== '' &&
+        this.existFile === true
+      )
+        this.$store.dispatch('converter/save_music_file', {
+          file: this.form.formData,
+        });
+      if (this.file_path !== '' && this.file_name !== '')
+        this.$store.dispatch('converter/save_music_information', {
+          title: this.form.fileTitle,
+          description: this.form.fileDescrip,
+          ispublic: this.form.isPublic,
+          isseparate: this.form.isSeparate,
+          isconvert: this.form.wantToTransform,
+          file_path: this.file_path,
+          file_name: this.file_name,
+        });
     },
-    clear () {
+    clear() {
       this.form.fileTitle = '';
       this.form.fileDescrip = '';
-      this.existFile = "red";
+      this.existFile = 'red';
     },
     fileChange(e) {
-      this.existFile = "green";
+      this.existFile = 'green';
       this.form.formData = e;
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="stylus" scoped>
