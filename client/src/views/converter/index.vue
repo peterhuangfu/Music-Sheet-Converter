@@ -59,7 +59,7 @@
               <el-input
                 type="text"
                 placeholder=""
-                v-model="form.fileName"
+                v-model="form.fileTitle"
                 maxlength="30"
                 show-word-limit
               >
@@ -166,7 +166,7 @@ export default {
   data() {
     return {
       form: {
-        fileName: '',
+        fileTitle: '',
         fileDescrip: '',
         isSeparate: false,
         isPublic: false,
@@ -174,6 +174,8 @@ export default {
         formData:new FormData(),
       },
       existFile : "red",
+      file_path: "",
+      file_name: "",
     };
   },
   created() {
@@ -194,7 +196,8 @@ export default {
   },
   computed: {
     ...mapState({
-      works: state => state.converter.works,
+      file_path: state => state.converter.file_path,
+      file_name: state => state.converter.file_name,
       isAuthenticated: state => state.auth.isAuthenticated,
       isLoginCheck: state => state.auth.isLoginCheck,
       switch_judge: state => state.auth.switch_judge,
@@ -204,9 +207,6 @@ export default {
     }
   },
   watch: {
-    works: function(works) {
-      console.log('Get Works !');
-    },
     switch_judge: function(switch_judge) {
       if (this.isAuthenticated) {
         if (this.$router.history.current.path !== '/converter')
@@ -221,14 +221,15 @@ export default {
   // },
   methods: {
     onSubmit () {
-      if (this.form.fileName !== "" && this.form.fileDescrip !== "")
-        this.$store.dispatch('converter/save_music_information', {title: this.form.fileName, 
-        description: this.form.fileDescrip, ispublic: this.form.isPublic, isseparate: this.form.isSeparate,
-        isconvert: this.form.wantToTransform });
-      this.$store.dispatch('converter/save_music_file', {file: this.form.formData});
+      if (this.form.fileTitle !== "" && this.form.fileDescrip !== "" && this.existFile === true )
+        this.$store.dispatch('converter/save_music_file', {file: this.form.formData});
+        if (this.file_path !== "" && this.file_name !== "")
+          this.$store.dispatch('converter/save_music_information', {title: this.form.fileTitle, 
+          description: this.form.fileDescrip, ispublic: this.form.isPublic, isseparate: this.form.isSeparate,
+          isconvert: this.form.wantToTransform, file_path: this.file_path, file_name: this.file_name });
     },
     clear () {
-      this.form.fileName = '';
+      this.form.fileTitle = '';
       this.form.fileDescrip = '';
       this.existFile = "red";
     },
