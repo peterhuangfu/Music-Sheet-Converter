@@ -13,7 +13,7 @@ exports.get_profile = async (req, res) => {
     e.uploader = current_user.username
   }
 
-  for (e of user.user.download_works) {
+  for (e of user.download_works) {
     e.uploader = current_user.username
   }
 
