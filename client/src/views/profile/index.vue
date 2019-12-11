@@ -17,11 +17,12 @@
           <div
             style="color: #8692A4; font-size: 10px; width: 100px; word-break: break-all"
           >{{ userDesc }}</div>
-          <div
-            style="width: 35px; height: 35px;border-radius: 50%; background-color: #F0F2F4;display: flex;justify-content:center; align-items: center;"
-          >
-            <sheet-icon icon="mail" size="sm"></sheet-icon>
-          </div>
+          <el-button
+            style="width: 35px; height: 35px;background-color: #F0F2F4;display: flex;justify-content:center; align-items: center;"
+            icon="el-icon-edit"
+            circle
+            @click="editProfileVisible = true"
+          ></el-button>
         </div>
       </el-col>
       <el-col :span="15" style="background-color: black;">
@@ -60,25 +61,43 @@
           </el-col>
         </el-row>
         <hr style="border: 1px solid #222D3C; width: 90%" />
-        <!-- <div>
-
-        </div>-->
+        <div style="display: flex; justify-content: center">
+          <div style="width: 80%;">
+            <div
+              :key="work.file_id"
+              style=" margin: 3% 7%; display: inline-block; background-color: #EEF2F4; border-radius:8px; width: 36%; height: 100px;"
+              v-for="work in uploadWorks"
+            >
+              <div style="padding-left: 30px; padding-top:30px; color: #595E67">
+                <div>Title:{{work.title}}</div>
+                <div>Desc:{{work.description}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
       </el-col>
     </el-row>
+    <edit-profile :visible.sync="editProfileVisible"></edit-profile>
   </div>
 </template>
 <script>
 import { mapState, mapActions } from 'vuex';
+import EditProfile from './EditProfile.vue';
 export default {
   name: 'Profile',
+  components: {
+    EditProfile,
+  },
   data() {
     return {
-      userId: '@user12345',
-      userName: 'User1',
-      userGroup: 'A Cappella',
-      userPosition: 'Taipei',
-      userDesc: 'Hi, i’m a sdjicnidscsdcindscndcnjdcnjcdcmkdcdkcndcdccd',
+      userId: '',
+      userName: '',
+      userGroup: '',
+      userPosition: '',
+      userDesc: '',
       sheetCount: 0,
+      editProfileVisible: false,
+      uploadWorks: [],
     };
   },
   computed: {
@@ -90,6 +109,9 @@ export default {
     }),
   },
   watch: {
+    editProfileVisible(newVal) {
+      if (!newVal) window.location.reload();
+    },
     profiles(newVal) {
       // console.log(newVal);
       this.userId = `@${newVal.google_id}`;
@@ -98,6 +120,8 @@ export default {
       this.userPosition = newVal.address;
       this.userGroup = newVal.self_tags;
       this.sheetCount = newVal.upload_works.length;
+      this.uploadWorks = newVal.upload_works;
+      // console.log(this.uploadWorks);
     },
     switch_judge: function(switch_judge) {
       if (!this.isLoginCheck) {
@@ -113,6 +137,9 @@ export default {
       this.$store.dispatch('profile/getAllProfiles');
       // console.log('start');
     },
+  },
+  mounted() {
+    this.getProfile();
   },
 };
 </script>
