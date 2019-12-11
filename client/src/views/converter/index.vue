@@ -174,8 +174,6 @@ export default {
         formData:new FormData(),
       },
       existFile : "red",
-      file_path: "",
-      file_name: "",
     };
   },
   created() {
@@ -214,11 +212,6 @@ export default {
       } else this.$router.push('/');
     },
   },
-  // computed: {
-  //    greenOrRed: function () {
-  //     return this.existFile;
-  //   }
-  // },
   methods: {
     onSubmit () {
       if (this.form.fileTitle !== "" && this.form.fileDescrip !== "" && this.existFile === true )
