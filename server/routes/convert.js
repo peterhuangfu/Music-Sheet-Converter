@@ -9,7 +9,7 @@ const Busboy = require('busboy')
 exports.convert_for_music = async (req, res) => {
   try {
     await save_music_file(req, res)
-
+    
   } catch (err) {
     console.error(err)
   }
@@ -21,7 +21,7 @@ exports.convert_for_music_information = async (req, res) => {
 
   } catch (err) {
     res.status(403).json({
-      message: 'save information fail',
+      message: 'save information and convert fail',
       type: 'fail'
     })
   }
@@ -52,7 +52,7 @@ const save_music_file = async (req, res) => {
 
       busboy.on('finish', () => {
         res.status(200).send({
-          message: file_path,
+          message: { file_path: file_path, file_name: file_name },
           type: 'success'
         })
       })
@@ -67,6 +67,7 @@ const save_music_information = async (req, res) => {
   const work_id = ObjectId()
   const this_id = works_num + 1
   const file_path = req.body.file_path
+  const file_name = req.body.file_name
 
   const newWork = new Works({
     _id: work_id,
@@ -79,7 +80,7 @@ const save_music_information = async (req, res) => {
     uploader: ObjectId(req.session.current_user._id),
     click_times: 0,
     download_times: 0,
-    seperate: req.body.isseperate,
+    separate: req.body.isseparate,
     convert: req.body.isconvert,
     public: req.body.ispublic
   })
@@ -87,14 +88,42 @@ const save_music_information = async (req, res) => {
   await newWork.save()
   await User.updateOne({ google_id: req.session.current_user.google_id }, { $push: { upload_works: work_id } })
 
-  res.status(200).json({
-    message: 'save information success',
-    type: 'success'
-  })
+  const convert_result = await call_sheep_server(req.session.current_user.username, file_path, file_name)
 
-  call_sheep_server(file_path)
+  if (convert_result.success)
+    res.status(200).json({
+      message: 'save information and convert success',
+      type: 'success'
+    })
+  else
+    res.status(403).json({
+      message: 'save information and convert fail',
+      type: 'fail'
+    })
 }
 
-const call_sheep_server = async (path) => {
-  console.log(path)
+const call_sheep_server = async (user, path, file_name) => {
+  askfor_convert = request({
+    method: "POST",
+    uri: "Sheep's ip",
+    form: {
+      method: "both",
+      path: path,
+      user: user,
+      file: file_name
+    },
+    json: true
+  })
+  .then(res => { return res.json() })
+  .then(res => {
+    return {
+      success: res.success,
+      voice: res.voice,
+      others: res.others,
+      pdf: res.pdf
+    }
+  })
+  .catch(err => {
+    console.error(err)
+  })
 }

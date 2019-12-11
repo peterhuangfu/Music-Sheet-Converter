@@ -84,7 +84,7 @@ const Explore = {
           var fileLink = document.createElement('a');
 
           fileLink.href = fileURL;
-          fileLink.setAttribute('download', 'seperated-piano.mp3');
+          fileLink.setAttribute('download', 'separated-piano.mp3');
           document.body.appendChild(fileLink);
 
           fileLink.click();
@@ -109,7 +109,7 @@ const Explore = {
           var fileLink = document.createElement('a');
 
           fileLink.href = fileURL;
-          fileLink.setAttribute('download', 'seperated-human.mp3');
+          fileLink.setAttribute('download', 'separated-human.mp3');
           document.body.appendChild(fileLink);
 
           fileLink.click();

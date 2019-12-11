@@ -8,12 +8,14 @@ const Works = require('../models/Works')
 exports.get_profile = async (req, res) => {
   const current_user = req.session.current_user
   let user = await User.findOne({ google_id: current_user.google_id }).populate('upload_works').populate('download_works').lean()
-  user.upload_works.forEach(e => {
+
+  for (e of user.upload_works) {
     e.uploader = current_user.username
-  })
-  user.download_works.forEach(e => {
+  }
+
+  for (e of user.user.download_works) {
     e.uploader = current_user.username
-  })
+  }
 
   const response = user
   

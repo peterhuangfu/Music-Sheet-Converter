@@ -11,7 +11,7 @@ const WorksSchema = Schema({
   uploader: { type: Schema.Types.ObjectId, ref: 'User' },
   click_times: Number,
   download_times: Number,
-  seperate: Boolean,
+  separate: Boolean,
   convert: Boolean,
   public: Boolean
 },  {

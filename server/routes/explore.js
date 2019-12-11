@@ -16,7 +16,7 @@ exports.getPublicWorks = async (req, res) => {
     
     if (time_range !== 0) {
       all_works = await Works.find({
-        ispublic: true,
+        public: true,
         // created_at : { 
         //   $lt: time_to, 
         //   $gte: time_from
@@ -24,7 +24,7 @@ exports.getPublicWorks = async (req, res) => {
       }).lean()
     }
     else {
-      all_works = await Works.find({ ispublic: true }).lean()
+      all_works = await Works.find({ public: true }).lean()
     }
 
     for (e of all_works) {
@@ -32,12 +32,6 @@ exports.getPublicWorks = async (req, res) => {
       const user = await User.findOne({ _id: uploader }, { username: 1 })
       e.uploader = user.username
     }
-
-    // all_works.forEach(async e => {
-    //   const uploader = ObjectId(e.uploader)
-    //   const user = await User.findOne({ _id: uploader }, { username: 1 })
-    //   e.uploader = user.username
-    // })
     
     const response = all_works    
     res.status(200).send(response)
@@ -112,7 +106,7 @@ exports.downloadSepPiano = async (req, res) => {
 
   } catch (err) {
     res.status(403).json({
-      message: 'download seperated piano file fail',
+      message: 'download separated piano file fail',
       type: 'fail'
     })
   }
@@ -131,7 +125,7 @@ exports.downloadSepHuman = async (req, res) => {
 
   } catch (err) {
     res.status(403).json({
-      message: 'download seperated human file fail',
+      message: 'download separated human file fail',
       type: 'fail'
     })
   }

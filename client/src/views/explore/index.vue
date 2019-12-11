@@ -48,10 +48,10 @@
     </el-row>
 
     <el-row>
-      <el-col class="explore-seperate-piano-prefix"></el-col>
-      <el-col :span="4" :offset="1" class="explore-seperate-piano"><b>SEPERATED PIANO MUSIC</b></el-col>
+      <el-col class="explore-separate-piano-prefix"></el-col>
+      <el-col :span="4" :offset="1" class="explore-separate-piano"><b>SEPARATED PIANO MUSIC</b></el-col>
     </el-row>
-    <el-row class="explore-seperate-piano-table">
+    <el-row class="explore-separate-piano-table">
       <el-table
         :data="works"
         stripe
@@ -71,10 +71,10 @@
     </el-row>
 
     <el-row>
-      <el-col class="explore-seperate-human-prefix"></el-col>
-      <el-col :span="4" :offset="1" class="explore-seperate-human"><b>SEPERATE HUMAN SOUND</b></el-col>
+      <el-col class="explore-separate-human-prefix"></el-col>
+      <el-col :span="4" :offset="1" class="explore-separate-human"><b>separate HUMAN SOUND</b></el-col>
     </el-row>
-    <el-row class="explore-seperate-human-table">
+    <el-row class="explore-separate-human-table">
       <el-table
         :data="works"
         stripe
@@ -195,12 +195,12 @@ export default {
   line-height 39px
   min-height 39px
 
-.explore-piano-portfolio-prefix, .explore-seperate-piano-prefix, .explore-seperate-human-prefix
+.explore-piano-portfolio-prefix, .explore-separate-piano-prefix, .explore-separate-human-prefix
   width 10px
   background-color #1995DC
   min-height 34px
 
-.explore-piano-portfolio, .explore-seperate-piano, .explore-seperate-human
+.explore-piano-portfolio, .explore-separate-piano, .explore-separate-human
   line-height 34px
   font-size 20px
 </style>
