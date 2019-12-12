@@ -41,56 +41,63 @@
       >
     </el-row>
     <el-row class="explore-piano-portfolio-table">
-      <el-table :data="works" stripe style="width: 100%">
-        <el-table-column
-          prop="file_id"
-          label="No."
-          width="180"
-        ></el-table-column>
-        <el-table-column
-          prop="title"
-          label="Title"
-          width="220"
-        ></el-table-column>
-        <el-table-column
-          prop="uploader"
-          label="Uploader"
-          width="180"
-        ></el-table-column>
-        <el-table-column
-          prop="desription"
-          label="Description"
-          width="400"
-        ></el-table-column>
-        <el-table-column label="Actions">
-          <template slot-scope="scope">
-            <el-button
-              @click.native="openPortfolio(scope.$index, scope.row)"
-              type="primary"
-              size="mini"
-              circle
-            >
-              <sheet-icon
-                icon="eye"
-                size="sm"
-                style="position: relative; left: 1px; top: 1px"
-              ></sheet-icon>
-            </el-button>
-            <el-button
-              @click.native="downloadPortfolio(scope.$index, scope.row)"
-              type="success"
-              size="mini"
-              circle
-            >
-              <sheet-icon
-                icon="download"
-                size="sm"
-                style="position: relative; left: 1px; top: 1px"
-              ></sheet-icon>
-            </el-button>
-          </template>
-        </el-table-column>
-      </el-table>
+      <el-col :span="24">
+        <el-table :data="public_pdfs" stripe style="width: 100%">
+          <el-table-column
+            prop="file_id"
+            label="No."
+            width="180"
+          ></el-table-column>
+          <el-table-column
+            prop="title"
+            label="Title"
+            width="220"
+          ></el-table-column>
+          <el-table-column
+            prop="uploader"
+            label="Uploader"
+            width="180"
+          ></el-table-column>
+          <el-table-column
+            prop="desription"
+            label="Description"
+            width="400"
+          ></el-table-column>
+          <el-table-column label="Actions">
+            <template slot-scope="scope">
+              <el-button
+                @click.native="openPortfolio(scope.$index, scope.row)"
+                type="primary"
+                size="mini"
+                circle
+              >
+                <sheet-icon
+                  icon="eye"
+                  size="sm"
+                  style="position: relative; left: 1px; top: 1px"
+                ></sheet-icon>
+              </el-button>
+              <el-button
+                @click.native="downloadPortfolio(scope.$index, scope.row)"
+                type="success"
+                size="mini"
+                circle
+              >
+                <sheet-icon
+                  icon="download"
+                  size="sm"
+                  style="position: relative; left: 1px; top: 1px"
+                ></sheet-icon>
+              </el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+        <el-pagination
+          class="piano-portfolio-paginator"
+          layout="prev, pager, next"
+          :total="pdfs_len">
+        </el-pagination>
+      </el-col>
     </el-row>
 
     <el-row>
@@ -227,6 +234,24 @@ export default {
       isLoginCheck: state => state.auth.isLoginCheck,
       switch_judge: state => state.auth.switch_judge,
     }),
+    public_pdfs() {
+      return this.works.filter(w => w.pdf_file_path !== '' && w.title.includes(this.title_filter) && w.title.includes(this.uploader_filter));
+    },
+    public_sep_piano() {
+      return this.works.filter(w => w.sep_piano_path !== '' && w.title.includes(this.title_filter) && w.title.includes(this.uploader_filter));
+    },
+    public_sep_human() {
+      return this.works.filter(w => w.sep_human_path !== '' && w.title.includes(this.title_filter) && w.title.includes(this.uploader_filter));
+    },
+    pdfs_len() {
+      return this.public_pdfs.length;
+    },
+    sep_piano_len() {
+      return this.public_sep_piano.length;
+    },
+    sep_human_len() {
+      return this.public_sep_human.length;
+    }
   },
   methods: {
     getAllWorks(range) {
@@ -305,4 +330,10 @@ export default {
 .explore-piano-portfolio, .explore-separate-piano, .explore-separate-human
   line-height 34px
   font-size 20px
+
+.piano-portfolio-paginator, .separate-piano-paginator, .separate-human-paginator
+  position: relative
+  float: right
+  right: 20px
+  top: 30px
 </style>
