@@ -8,7 +8,7 @@ const UserSchema = Schema({
   email: String,
   self_description: String,
   self_tags: String,
-  address: String,   
+  address: String,  
   profile_picture_url: String,
   upload_works: [{ type: Schema.Types.ObjectId, ref: 'Works' }],
   download_works: [{ type: Schema.Types.ObjectId, ref: 'Works' }],

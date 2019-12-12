@@ -28,7 +28,7 @@ exports.edit_profile = async (req, res) => {
     { google_id: user.google_id },
     {
       $set: {
-        user_name: update.user_name,
+        username: update.username,
         self_tags: update.self_tags,
         self_description: update.self_description,
         address: update.address

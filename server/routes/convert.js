@@ -105,7 +105,7 @@ const save_music_information = async (req, res) => {
 const call_sheep_server = async (user, path, file_name) => {
   askfor_convert = request({
     method: "POST",
-    uri: "Sheep's ip",
+    uri: "http://192.168.43.1:10000/api",
     form: {
       method: "both",
       path: path,
@@ -120,7 +120,8 @@ const call_sheep_server = async (user, path, file_name) => {
       success: res.success,
       voice: res.voice,
       others: res.others,
-      pdf: res.pdf
+      pdf: res.pdf,
+      msg: res.msg
     }
   })
   .catch(err => {
