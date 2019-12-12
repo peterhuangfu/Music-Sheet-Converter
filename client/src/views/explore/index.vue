@@ -34,80 +34,78 @@
     </el-header>
     <!-- </el-container>
   <el-container> -->
-    <el-row>
+    <el-row class="explore-piano-portfolio-prefix-container">
       <el-col class="explore-piano-portfolio-prefix"></el-col>
       <el-col :span="4" :offset="1" class="explore-piano-portfolio"
         ><b>PIANO PORTFOLIO SHEET</b></el-col
       >
     </el-row>
-    <el-row class="explore-piano-portfolio-table">
-      <el-col :span="24">
-        <el-table :data="public_pdfs" stripe style="width: 100%">
-          <el-table-column
-            prop="file_id"
-            label="No."
-            width="180"
-          ></el-table-column>
-          <el-table-column
-            prop="title"
-            label="Title"
-            width="220"
-          ></el-table-column>
-          <el-table-column
-            prop="uploader"
-            label="Uploader"
-            width="180"
-          ></el-table-column>
-          <el-table-column
-            prop="desription"
-            label="Description"
-            width="400"
-          ></el-table-column>
-          <el-table-column label="Actions">
-            <template slot-scope="scope">
-              <el-button
-                @click.native="openPortfolio(scope.$index, scope.row)"
-                type="primary"
-                size="mini"
-                circle
-              >
-                <sheet-icon
-                  icon="eye"
-                  size="sm"
-                  style="position: relative; left: 1px; top: 1px"
-                ></sheet-icon>
-              </el-button>
-              <el-button
-                @click.native="downloadPortfolio(scope.$index, scope.row)"
-                type="success"
-                size="mini"
-                circle
-              >
-                <sheet-icon
-                  icon="download"
-                  size="sm"
-                  style="position: relative; left: 1px; top: 1px"
-                ></sheet-icon>
-              </el-button>
-            </template>
-          </el-table-column>
-        </el-table>
-        <el-pagination
-          class="piano-portfolio-paginator"
-          layout="prev, pager, next"
-          :total="pdfs_len">
-        </el-pagination>
-      </el-col>
+    <el-row class="explore-piano-portfolio-table-container">
+      <el-table :data="public_pdfs" stripe style="width: 100%">
+        <el-table-column
+          prop="file_id"
+          label="No."
+          width="180"
+        ></el-table-column>
+        <el-table-column
+          prop="title"
+          label="Title"
+          width="220"
+        ></el-table-column>
+        <el-table-column
+          prop="uploader"
+          label="Uploader"
+          width="180"
+        ></el-table-column>
+        <el-table-column
+          prop="desription"
+          label="Description"
+          width="400"
+        ></el-table-column>
+        <el-table-column label="Actions">
+          <template slot-scope="scope">
+            <el-button
+              @click.native="openPortfolio(scope.$index, scope.row)"
+              type="primary"
+              size="mini"
+              circle
+            >
+              <sheet-icon
+                icon="eye"
+                size="sm"
+                style="position: relative; left: 1px; top: 1px"
+              ></sheet-icon>
+            </el-button>
+            <el-button
+              @click.native="downloadPortfolio(scope.$index, scope.row)"
+              type="success"
+              size="mini"
+              circle
+            >
+              <sheet-icon
+                icon="download"
+                size="sm"
+                style="position: relative; left: 1px; top: 1px"
+              ></sheet-icon>
+            </el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+      <el-pagination
+        class="piano-portfolio-paginator"
+        layout="prev, pager, next"
+        :total="pdfs_len">
+      </el-pagination>
     </el-row>
 
-    <el-row>
+    <el-row class="explore-separate-piano-prefix-container">
       <el-col class="explore-separate-piano-prefix"></el-col>
       <el-col :span="4" :offset="1" class="explore-separate-piano"
         ><b>SEPARATED PIANO MUSIC</b></el-col
       >
     </el-row>
-    <el-row class="explore-separate-piano-table">
-      <el-table :data="works" stripe style="width: 100%">
+    <el-row class="explore-separate-piano-table-container">
+      <el-table :data="public_sep_piano" stripe style="width: 100%">
         <el-table-column
           prop="file_id"
           label="No."
@@ -145,15 +143,20 @@
           </template>
         </el-table-column>
       </el-table>
+      <el-pagination
+        class="piano-portfolio-paginator"
+        layout="prev, pager, next"
+        :total="sep_piano_len">
+      </el-pagination>
     </el-row>
 
-    <el-row>
+    <el-row class="explore-separate-human-prefix-container">
       <el-col class="explore-separate-human-prefix"></el-col>
       <el-col :span="4" :offset="1" class="explore-separate-human"
         ><b>separate HUMAN SOUND</b></el-col
       >
     </el-row>
-    <el-row class="explore-separate-human-table">
+    <el-row class="explore-separate-human-table-container">
       <el-table :data="works" stripe style="width: 100%">
         <el-table-column
           prop="file_id"
@@ -192,6 +195,11 @@
           </template>
         </el-table-column>
       </el-table>
+      <el-pagination
+        class="piano-portfolio-paginator"
+        layout="prev, pager, next"
+        :total="sep_human_len">
+      </el-pagination>
     </el-row>
   </el-container>
 </template>
@@ -229,10 +237,9 @@ export default {
   computed: {
     ...mapState({
       works: state => state.explore.works,
-      open_work: state => state.explore.openWork,
       isAuthenticated: state => state.auth.isAuthenticated,
       isLoginCheck: state => state.auth.isLoginCheck,
-      switch_judge: state => state.auth.switch_judge,
+      // switch_judge: state => state.auth.switch_judge,
     }),
     public_pdfs() {
       return this.works.filter(w => w.pdf_file_path !== '' && w.title.includes(this.title_filter) && w.title.includes(this.uploader_filter));
@@ -290,8 +297,8 @@ export default {
     works: function(works) {
       console.log('Get Works !');
     },
-    switch_judge: function(switch_judge) {
-      if (!this.isLoginCheck) {
+    isLoginCheck: function(isLoginCheck) {
+      if (!isLoginCheck) {
         this.$store.dispatch('auth/CheckLoginStatus');
       } else {
         if (this.isAuthenticated) this.getAllWorks(this.time_range_value);

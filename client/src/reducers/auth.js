@@ -6,21 +6,18 @@ const Auth = {
     isLoginCheck: false,
     isAuthenticated: false,
     user: {},
-    switch_judge: false,
     error: false,
   },
   mutations: {
     SET_USER(state, payload) {
       state.user = payload.user;
       state.isAuthenticated = !!payload.user;
-      state.switch_judge = !state.switch_judge;
       state.error = false;
     },
     CHECK_LOGIN_STATUS(state, payload) {
       state.user = payload.user;
       state.isAuthenticated = !!payload.user;
-      state.isLoginCheck = !!payload.user;
-      state.switch_judge = !state.switch_judge;
+      state.isLoginCheck = true;
       state.error = false;
     },
     ERROR_OCCUR(state) {
@@ -30,11 +27,10 @@ const Auth = {
       state.isLoginCheck = false;
       state.isAuthenticated = false;
       state.user = {};
-      state.switch_judge = !state.switch_judge;
       state.error = false;
     },
     NOT_LOGIN(state) {
-      state.switch_judge = !state.switch_judge;
+      state.isLoginCheck = true;
     },
   },
   actions: {

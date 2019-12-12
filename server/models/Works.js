@@ -3,9 +3,9 @@ const Schema = mongoose.Schema
 
 const WorksSchema = Schema({
   file_id: { type: String, unique: true, required: true },
-  pdf_file_path: { type: String, unique: true },
-  sep_piano_path: { type: String, unique: true },
-  sep_human_path: { type: String, unique: true },
+  pdf_file_path: String,
+  sep_piano_path: String,
+  sep_human_path: String,
   title: { type: String, required: true },
   description: String,
   uploader: { type: Schema.Types.ObjectId, ref: 'User' },

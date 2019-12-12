@@ -210,14 +210,13 @@ export default {
       file_name: state => state.converter.file_name,
       isAuthenticated: state => state.auth.isAuthenticated,
       isLoginCheck: state => state.auth.isLoginCheck,
-      switch_judge: state => state.auth.switch_judge,
     }),
     greenOrRed: function() {
       return this.existFile;
     },
   },
   watch: {
-    switch_judge: function(switch_judge) {
+    isLoginCheck: function(isLoginCheck) {
       if (this.isAuthenticated) {
         if (this.$router.history.current.path !== '/converter')
           this.$router.push('/converter');

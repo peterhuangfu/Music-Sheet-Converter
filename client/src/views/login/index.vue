@@ -64,7 +64,6 @@ export default {
     ...mapState({
       isAuthenticated: state => state.auth.isAuthenticated,
       isLoginCheck: state => state.auth.isLoginCheck,
-      switch_judge: state => state.auth.switch_judge,
     }),
   },
   methods: {
@@ -81,7 +80,7 @@ export default {
     },
   },
   watch: {
-    switch_judge: function(switch_judge) {
+    isLoginCheck: function(isLoginCheck) {
       if (this.isAuthenticated) this.$router.push('/homepage');
       else {
         if (this.$router.history.current.path !== '/') this.$router.push('/');

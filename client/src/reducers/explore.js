@@ -5,7 +5,6 @@ const Explore = {
   state: {
     information: '',
     works: [],
-    openWork: '',
   },
   mutations: {
     GETWORKS(state, payload) {

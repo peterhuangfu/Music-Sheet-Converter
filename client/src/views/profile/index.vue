@@ -111,7 +111,6 @@ export default {
     ...mapState({
       isAuthenticated: state => state.auth.isAuthenticated,
       isLoginCheck: state => state.auth.isLoginCheck,
-      switch_judge: state => state.auth.switch_judge,
       profiles: state => state.profile.profiles,
     }),
   },
@@ -130,7 +129,7 @@ export default {
       this.uploadWorks = newVal.upload_works;
       // console.log(this.uploadWorks);
     },
-    switch_judge: function(switch_judge) {
+    isLoginCheck: function(isLoginCheck) {
       if (!this.isLoginCheck) {
         this.$store.dispatch('auth/CheckLoginStatus');
       } else {

@@ -35,5 +35,7 @@ exports.edit_profile = async (req, res) => {
       }
     }
   )
-  res.send({ user: user })
+  
+  const updated_user = await User.findOne({ google_id: user.google_id })
+  res.send({ user: updated_user })
 }

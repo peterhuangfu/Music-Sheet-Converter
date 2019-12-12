@@ -45,7 +45,7 @@ const save_music_file = async (req, res) => {
       file.resume()
     }
     else {
-      const file_path = '/Users/liuweicheng/Desktop/' + filename
+      const file_path = '/Users/huangfu/Desktop/upload' + filename
       file.pipe(fs.createWriteStream(file_path))
 
       busboy.on('finish', () => {
@@ -83,7 +83,7 @@ const save_music_information = async (req, res) => {
       convert: req.body.isconvert,
       public: req.body.ispublic
     })
-    
+
     await newWork.save()
     await User.updateOne({ google_id: req.session.current_user.google_id }, { $push: { upload_works: work_id } })
 
