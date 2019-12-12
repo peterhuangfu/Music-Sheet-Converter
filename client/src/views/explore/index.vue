@@ -1,35 +1,37 @@
 <template>
   <el-container class="wrapper">
-    <el-row class="explore-action-bar" :gutter="4">
-      <el-col :span="1" class="explore-select-time">All</el-col>
-      <el-col :span="4" :offset="1">
-        <el-select
-          v-model="time_range_value"
-          placeholder="Select Time Range"
-          @change="getAllWorks"
-        >
-          <el-option
-            v-for="each in time_range_options"
-            :key="each.value"
-            :label="each.label"
-            :value="each.value"
+    <el-header>
+      <el-row class="explore-action-bar" :gutter="4">
+        <el-col :span="1" class="explore-select-time">All</el-col>
+        <el-col :span="4" :offset="1">
+          <el-select
+            v-model="time_range_value"
+            placeholder="Select Time Range"
+            @change="getAllWorks"
           >
-          </el-option>
-        </el-select>
-      </el-col>
-      <el-col :span="4" :offset="5">
-        <el-input
-          placeholder="Filter by Title"
-          v-model="title_filter"
-        ></el-input>
-      </el-col>
-      <el-col :span="4" :offset="1">
-        <el-input
-          placeholder="Filter by Uploader"
-          v-model="uploader_filter"
-        ></el-input>
-      </el-col>
-    </el-row>
+            <el-option
+              v-for="each in time_range_options"
+              :key="each.value"
+              :label="each.label"
+              :value="each.value"
+            >
+            </el-option>
+          </el-select>
+        </el-col>
+        <el-col :span="4" :offset="5">
+          <el-input
+            placeholder="Filter by Title"
+            v-model="title_filter"
+          ></el-input>
+        </el-col>
+        <el-col :span="4" :offset="1">
+          <el-input
+            placeholder="Filter by Uploader"
+            v-model="uploader_filter"
+          ></el-input>
+        </el-col>
+      </el-row>
+    </el-header>
     <!-- </el-container>
   <el-container> -->
     <el-row>
