@@ -120,10 +120,10 @@ export default {
       if (!newVal) window.location.reload();
     },
     profiles(newVal) {
-      // console.log(newVal);
+      console.log(newVal);
       this.userId = `@${newVal.google_id}`;
       this.userName = newVal.username;
-      this.userDesc = newVal.self_tags;
+      this.userDesc = newVal.self_description;
       this.userPosition = newVal.address;
       this.userGroup = newVal.self_tags;
       this.sheetCount = newVal.upload_works.length;

@@ -27,7 +27,7 @@ const Profile = {
     ) {
       agent
         .post('profile/edit_profile', {
-          user_name: user_name,
+          username: user_name,
           self_tags: self_tags,
           self_description: self_description,
           address: address,
