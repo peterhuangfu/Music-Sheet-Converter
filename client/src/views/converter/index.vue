@@ -18,7 +18,7 @@
                 >
                   Upload File
                 </div>
-                <el-upload
+                <!-- <el-upload
                   class="upload-demo"
                   drag
                   accept=".wav, .mp3"
@@ -27,7 +27,8 @@
                   style="margin-left: 8%; margin-top: 50px"
                   :auto-upload="false"
                   name="file"
-                >
+                > -->
+                <input type="file" name="file" @change="fileChange" accept=".wav, .mp3"/>
                   <i class="el-icon-upload"></i>
                   <div style="fontSize: 20px; color: gray; text-align:center">
                     click or drag to upload
@@ -38,7 +39,7 @@
                   >
                     .wav and .mp3 only
                   </div>
-                </el-upload>
+                <!-- </el-upload> -->
                 <div style="text-align:center">
                   <el-button
                     circle
@@ -182,7 +183,7 @@ export default {
         isSeparate: false,
         isPublic: false,
         wantToTransform: false,
-        formData: new FormData(),
+        formData: null,
       },
       existFile: 'red',
     };
@@ -225,24 +226,33 @@ export default {
   },
   methods: {
     onSubmit() {
-      if (
-        this.form.fileTitle !== '' &&
-        this.form.fileDescrip !== '' &&
-        this.existFile === true
-      )
-        this.$store.dispatch('converter/save_music_file', {
-          file: this.form.formData,
-        });
-      if (this.file_path !== '' && this.file_name !== '')
-        this.$store.dispatch('converter/save_music_information', {
-          title: this.form.fileTitle,
-          description: this.form.fileDescrip,
-          ispublic: this.form.isPublic,
-          isseparate: this.form.isSeparate,
-          isconvert: this.form.wantToTransform,
-          file_path: this.file_path,
-          file_name: this.file_name,
-        });
+      const converting = new Promise(async (resolve, reject) => {
+        if (this.form.fileTitle !== '' && this.form.fileDescrip !== '' && this.existFile === "green"){ 
+          let result = await this.$store.dispatch('converter/save_music_file', this.form.formData);
+          resolve(result);
+        }
+        else
+          reject();
+      })
+
+      converting
+      .then(res => {
+        if (res.file_path !== '' && res.file_name !== '')
+          this.$store.dispatch('converter/save_music_information', {
+            title: this.form.fileTitle,
+            description: this.form.fileDescrip,
+            ispublic: this.form.isPublic,
+            isseparate: this.form.isSeparate,
+            isconvert: this.form.wantToTransform,
+            file_path: this.file_path,
+            file_name: this.file_name,
+          });
+        else
+          return 0;
+      })
+      .catch(err => {
+        console.error(err)
+      })
     },
     clear() {
       this.form.fileTitle = '';
@@ -251,7 +261,7 @@ export default {
     },
     fileChange(e) {
       this.existFile = 'green';
-      this.form.formData = e;
+      this.form.formData = e.target.files[0];
     },
   },
 };

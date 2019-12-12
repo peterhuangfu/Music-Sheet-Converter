@@ -1,4 +1,5 @@
 import agent from './agent';
+import axios from 'axios';
 
 const Converter = {
   namespaced: true,
@@ -29,7 +30,7 @@ const Converter = {
       }
     ) {
       agent
-        .post('convert/information', {
+        .post('convert/information' ,{
           file_path: '',
           title: title,
           description: description,
@@ -39,23 +40,26 @@ const Converter = {
           file_path: file_path,
           file_name: file_name,
         })
-        .then(res => {
-          console.log(res);
-        })
         .catch(err => {
           console.error(err);
         });
     },
-    save_music_file({ commit }, { file }) {
-      agent
-        .post('convert/music', { file: file }, { responseType: 'blob' })
+    async save_music_file({ commit }, file) {
+      let data = new FormData();
+      data.append('file', file)
+      let info = await agent
+        .post('convert/music', data, { headers: { 'Content-Type': 'multipart/form-data', 'Accept': '*/*' } })
         .then(res => {
-          commit('GETFILEPATH', res.data.message.file_path);
-          commit('GETFILENAME', res.data.message.file_name);
+          return {
+            file_path: res.data.message.file_path,
+            file_name: res.data.message.file_name
+          }
         })
         .catch(err => {
           console.error(err);
         });
+      
+      return info;
     },
   },
   getters: {},
