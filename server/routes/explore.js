@@ -17,10 +17,10 @@ exports.getPublicWorks = async (req, res) => {
     if (time_range !== 0) {
       all_works = await Works.find({
         public: true,
-        // created_at : { 
-        //   $lt: time_to, 
-        //   $gte: time_from
-        // }
+        created_at : { 
+          $lt: time_to, 
+          $gte: time_from
+        }
       }).lean()
     }
     else {
@@ -37,6 +37,8 @@ exports.getPublicWorks = async (req, res) => {
     res.status(200).send(response)
 
   } catch (err) {
+    console.log(err)
+
     res.status(403).json({
       message: 'get works fail',
       type: 'fail'

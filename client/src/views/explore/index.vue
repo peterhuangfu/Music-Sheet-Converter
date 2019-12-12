@@ -1,13 +1,14 @@
 <template>
   <el-container class="wrapper">
     <el-header>
-      <el-row class="explore-action-bar" :gutter="4">
+      <el-row class="explore-action-bar">
         <el-col :span="1" class="explore-select-time">All</el-col>
         <el-col :span="4" :offset="1">
           <el-select
             v-model="time_range_value"
             placeholder="Select Time Range"
             @change="getAllWorks"
+            style="min-width: 190px"
           >
             <el-option
               v-for="each in time_range_options"
@@ -18,16 +19,18 @@
             </el-option>
           </el-select>
         </el-col>
-        <el-col :span="4" :offset="5">
+        <el-col :span="4" :offset="9">
           <el-input
             placeholder="Filter by Title"
             v-model="title_filter"
+            style="min-width: 190px"
           ></el-input>
         </el-col>
         <el-col :span="4" :offset="1">
           <el-input
             placeholder="Filter by Uploader"
             v-model="uploader_filter"
+            style="min-width: 190px"
           ></el-input>
         </el-col>
       </el-row>
@@ -36,33 +39,33 @@
   <el-container> -->
     <el-row class="explore-piano-portfolio-prefix-container">
       <el-col class="explore-piano-portfolio-prefix"></el-col>
-      <el-col :span="4" :offset="1" class="explore-piano-portfolio"
-        ><b>PIANO PORTFOLIO SHEET</b></el-col
+      <el-col :span="8" class="explore-piano-portfolio"
+        ><b>Piano Portfolio Sheet</b></el-col
       >
     </el-row>
     <el-row class="explore-piano-portfolio-table-container">
-      <el-table :data="public_pdfs" stripe style="width: 100%">
+      <el-table :data="public_pdfs" :row-class-name="tableRowClassName" style="max-width: 1300px">
         <el-table-column
           prop="file_id"
           label="No."
-          width="180"
+          width="160"
         ></el-table-column>
         <el-table-column
           prop="title"
           label="Title"
-          width="220"
+          width="230"
         ></el-table-column>
         <el-table-column
           prop="uploader"
           label="Uploader"
-          width="180"
+          width="230"
         ></el-table-column>
         <el-table-column
           prop="desription"
           label="Description"
-          width="400"
+          width="420"
         ></el-table-column>
-        <el-table-column label="">
+        <el-table-column label="" align="right">
           <template slot-scope="scope">
             <el-button
               @click.native="openPortfolio(scope.$index, scope.row)"
@@ -91,42 +94,46 @@
           </template>
         </el-table-column>
       </el-table>
+    </el-row>
+    <el-row>
       <el-pagination
         class="piano-portfolio-paginator"
         layout="prev, pager, next"
-        :total="pdfs_len">
+        :total="pdfs_len"
+        :page-size="10"
+        @current-change="piano_portfolio_page_change">
       </el-pagination>
     </el-row>
 
     <el-row class="explore-separate-piano-prefix-container">
       <el-col class="explore-separate-piano-prefix"></el-col>
-      <el-col :span="4" :offset="1" class="explore-separate-piano"
-        ><b>SEPARATED PIANO MUSIC</b></el-col
+      <el-col :span="8" class="explore-separate-piano"
+        ><b>Separated Piano Sound</b></el-col
       >
     </el-row>
     <el-row class="explore-separate-piano-table-container">
-      <el-table :data="public_sep_piano" stripe style="width: 100%">
+      <el-table :data="public_sep_piano" :row-class-name="tableRowClassName" style="max-width: 1300px">
         <el-table-column
           prop="file_id"
           label="No."
-          width="180"
+          width="160"
         ></el-table-column>
         <el-table-column
           prop="title"
           label="Title"
-          width="220"
+          width="230"
         ></el-table-column>
         <el-table-column
           prop="uploader"
           label="Uploader"
-          width="180"
+          width="230"
         ></el-table-column>
         <el-table-column
           prop="desription"
           label="Description"
-          width="400"
+          width="420"
         ></el-table-column>
-        <el-table-column label="">
+        <el-table-column label="" align="right">
           <template slot-scope="scope">
             <el-button
               @click.native="downloadSepPiano(scope.$index, scope.row)"
@@ -143,42 +150,46 @@
           </template>
         </el-table-column>
       </el-table>
+    </el-row>
+    <el-row>
       <el-pagination
-        class="piano-portfolio-paginator"
+        class="separate-piano-paginator"
         layout="prev, pager, next"
-        :total="sep_piano_len">
+        :total="sep_piano_len"
+        :page-size="10"
+        @current-change="separate_piano_page_change">
       </el-pagination>
     </el-row>
 
     <el-row class="explore-separate-human-prefix-container">
       <el-col class="explore-separate-human-prefix"></el-col>
-      <el-col :span="4" :offset="1" class="explore-separate-human"
-        ><b>separate HUMAN SOUND</b></el-col
+      <el-col :span="8" class="explore-separate-human"
+        ><b>Separate Human Sound</b></el-col
       >
     </el-row>
     <el-row class="explore-separate-human-table-container">
-      <el-table :data="works" stripe style="width: 100%">
+      <el-table :data="public_sep_human" :row-class-name="tableRowClassName" style="max-width: 1300px">
         <el-table-column
           prop="file_id"
           label="No."
-          width="180"
+          width="160"
         ></el-table-column>
         <el-table-column
           prop="title"
           label="Title"
-          width="220"
+          width="230"
         ></el-table-column>
         <el-table-column
           prop="uploader"
           label="Uploader"
-          width="180"
+          width="230"
         ></el-table-column>
         <el-table-column
           prop="desription"
           label="Description"
-          width="400"
+          width="420"
         ></el-table-column>
-        <el-table-column label="">
+        <el-table-column label="" align="right">
           <template slot-scope="scope">
             <el-button
               @click.native="downloadSepHuman(scope.$index, scope.row)"
@@ -195,10 +206,14 @@
           </template>
         </el-table-column>
       </el-table>
+    </el-row>
+    <el-row>
       <el-pagination
-        class="piano-portfolio-paginator"
+        class="separate-human-paginator"
         layout="prev, pager, next"
-        :total="sep_human_len">
+        :total="sep_human_len"
+        :page-size="10"
+        @current-change="separate_human_page_change">
       </el-pagination>
     </el-row>
   </el-container>
@@ -232,6 +247,9 @@ export default {
       time_range_value: '7',
       title_filter: '',
       uploader_filter: '',
+      public_pdfs_index: 1,
+      public_sep_piano_index: 1,
+      public_sep_human_index: 1
     };
   },
   computed: {
@@ -239,26 +257,37 @@ export default {
       works: state => state.explore.works,
       isAuthenticated: state => state.auth.isAuthenticated,
       isLoginCheck: state => state.auth.isLoginCheck,
-      // switch_judge: state => state.auth.switch_judge,
     }),
     public_pdfs() {
-      return this.works.filter(w => w.pdf_file_path !== '' && w.title.includes(this.title_filter) && w.title.includes(this.uploader_filter));
+      return this.works
+              .filter(w => w.pdf_file_path !== '' && w.title.includes(this.title_filter) && w.uploader.includes(this.uploader_filter))
+              .slice(10*(this.public_pdfs_index-1), 10*(this.public_pdfs_index));
     },
     public_sep_piano() {
-      return this.works.filter(w => w.sep_piano_path !== '' && w.title.includes(this.title_filter) && w.title.includes(this.uploader_filter));
+      return this.works
+              .filter(w => w.sep_piano_path !== '' && w.title.includes(this.title_filter) && w.uploader.includes(this.uploader_filter))
+              .slice(10*(this.public_sep_piano_index-1), 10*(this.public_sep_piano_index));
     },
     public_sep_human() {
-      return this.works.filter(w => w.sep_human_path !== '' && w.title.includes(this.title_filter) && w.title.includes(this.uploader_filter));
+      return this.works
+              .filter(w => w.sep_human_path !== '' && w.title.includes(this.title_filter) && w.uploader.includes(this.uploader_filter))
+              .slice(10*(this.public_sep_human_index-1), 10*(this.public_sep_human_index));
     },
     pdfs_len() {
-      return this.public_pdfs.length;
+      return this.works
+              .filter(w => w.pdf_file_path !== '' && w.title.includes(this.title_filter) && w.uploader.includes(this.uploader_filter))
+              .length;
     },
     sep_piano_len() {
-      return this.public_sep_piano.length;
+      return this.works
+              .filter(w => w.sep_piano_path !== '' && w.title.includes(this.title_filter) && w.uploader.includes(this.uploader_filter))
+              .length;
     },
     sep_human_len() {
-      return this.public_sep_human.length;
-    }
+      return this.works
+              .filter(w => w.sep_human_path !== '' && w.title.includes(this.title_filter) && w.uploader.includes(this.uploader_filter))
+              .length;
+    },
   },
   methods: {
     getAllWorks(range) {
@@ -292,6 +321,22 @@ export default {
     resizeHandler() {
       this.windowWidth = window.innerWidth;
     },
+    piano_portfolio_page_change(index) {
+      this.public_pdfs_index = index;
+    },
+    separate_piano_page_change(index) {
+      this.public_sep_piano_index = index;
+    },
+    separate_human_page_change(index) {
+      this.public_sep_human_index = index;
+    },
+    tableRowClassName({ row, rowIndex }) {
+      if (rowIndex % 2 === 1) {
+        return 'second-row';
+      }
+
+      return '';
+    }
   },
   watch: {
     works: function(works) {
@@ -310,24 +355,25 @@ export default {
 </script>
 <style lang="stylus" scoped>
 .wrapper
-  min-width 100vw
-  width 100vw
+  padding-bottom: 10px
 
 .explore-action-bar
-  display block
   will-change padding-left
   transition padding-left 0.5s ease
-  margin-top 10px
-  min-width 100vw
-  max-width 100vw
+  margin-top 20px
+  width: auto
 
 .explore-select-time
   border-radius 5px
   background-color #1995DC
   color #ffffff
   text-align center
+  min-width: 50px
   line-height 39px
   min-height 39px
+
+.explore-piano-portfolio-prefix-container, .explore-separate-piano-prefix-container, .explore-separate-human-prefix-container
+  margin-top: 30px
 
 .explore-piano-portfolio-prefix, .explore-separate-piano-prefix, .explore-separate-human-prefix
   width 10px
@@ -335,12 +381,19 @@ export default {
   min-height 34px
 
 .explore-piano-portfolio, .explore-separate-piano, .explore-separate-human
+  margin-left: 10px
   line-height 34px
   font-size 20px
 
+.explore-piano-portfolio-table-container, .explore-separate-piano-table-container, .explore-separate-human-table-container
+  margin: 15px 0
+
 .piano-portfolio-paginator, .separate-piano-paginator, .separate-human-paginator
   position: relative
-  float: right
-  right: 20px
-  top: 30px
+  float: left
+  left: 40vw
+</style>
+<style lang="stylus">
+.el-table .second-row
+  background-color: #F4FBFE
 </style>
