@@ -62,7 +62,7 @@
           label="Description"
           width="400"
         ></el-table-column>
-        <el-table-column label="Actions">
+        <el-table-column label="">
           <template slot-scope="scope">
             <el-button
               @click.native="openPortfolio(scope.$index, scope.row)"
@@ -126,7 +126,7 @@
           label="Description"
           width="400"
         ></el-table-column>
-        <el-table-column label="Actions">
+        <el-table-column label="">
           <template slot-scope="scope">
             <el-button
               @click.native="downloadSepPiano(scope.$index, scope.row)"
@@ -178,7 +178,7 @@
           label="Description"
           width="400"
         ></el-table-column>
-        <el-table-column label="Actions">
+        <el-table-column label="">
           <template slot-scope="scope">
             <el-button
               @click.native="downloadSepHuman(scope.$index, scope.row)"

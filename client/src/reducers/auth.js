@@ -5,6 +5,7 @@ const Auth = {
   state: {
     isLoginCheck: false,
     isAuthenticated: false,
+    first_login: false,
     user: {},
     error: false,
   },
@@ -12,6 +13,7 @@ const Auth = {
     SET_USER(state, payload) {
       state.user = payload.user;
       state.isAuthenticated = !!payload.user;
+      state.first_login = true;
       state.error = false;
     },
     CHECK_LOGIN_STATUS(state, payload) {

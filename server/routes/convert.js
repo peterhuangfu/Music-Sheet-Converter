@@ -45,7 +45,7 @@ const save_music_file = async (req, res) => {
       file.resume()
     }
     else {
-      const file_path = '/Users/huangfu/Desktop/upload' + filename
+      const file_path = '/Users/huangfu/Desktop/upload/' + filename
       file.pipe(fs.createWriteStream(file_path))
 
       busboy.on('finish', () => {
