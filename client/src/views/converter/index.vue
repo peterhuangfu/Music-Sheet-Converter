@@ -1,6 +1,8 @@
 <template>
   <div>
-    <el-form ref="form" :model="form" label-width="80px">
+    <div style="height:60px; backgroundColor:white;">
+    </div>
+    <el-form  :model="form" label-width="80px">
       <el-row>
         <el-col :span="12">
           <div
@@ -18,20 +20,24 @@
                 >
                   Upload File
                 </div>
-                <!-- <el-upload
-                  class="upload-demo"
-                  drag
-                  accept=".wav, .mp3"
-                  action="https://jsonplaceholder.typicode.com/posts/"
-                  :on-change="fileChange"
-                  style="margin-left: 8%; margin-top: 50px"
-                  :auto-upload="false"
-                  name="file"
-                > -->
-                <input type="file" name="file" @change="fileChange" accept=".wav, .mp3"/>
-                  <i class="el-icon-upload"></i>
-                  <div style="fontSize: 20px; color: gray; text-align:center">
-                    click or drag to upload
+                <div>
+                    <label align="center" for="file-upload" style="outline: none; cursor: pointer;">
+                      <input
+                        @change="fileChange"
+                        id="file-upload"
+                        type="file"
+                        name="file"
+                      />
+                      <div>
+                        <img src="../../picture/uploadPic.jpeg" style="width:300px; height:300px">
+                      </div>
+                    </label>
+                  </div>
+                  <div style="fontSize: 20px; color: gray; text-align:center; margin-top:3px" v-if="existFile === 'red'">
+                    click to upload
+                  </div>
+                  <div style="fontSize: 20px; color: gray; text-align:center; margin-top:3px" v-else>
+                    {{uploadName}}
                   </div>
                   <div
                     style="fontSize: 15px; color: white; margin-top:12px"
@@ -39,7 +45,6 @@
                   >
                     .wav and .mp3 only
                   </div>
-                <!-- </el-upload> -->
                 <div style="text-align:center">
                   <el-button
                     circle
@@ -186,6 +191,7 @@ export default {
         formData: null,
       },
       existFile: 'red',
+      uploadName: '',
     };
   },
   created() {
@@ -252,15 +258,21 @@ export default {
       .catch(err => {
         console.error(err)
       })
+      alert("轉譜成功！！！！")
+      this.$router.push('/homepage');
     },
     clear() {
       this.form.fileTitle = '';
       this.form.fileDescrip = '';
+      this.form.formData = null
       this.existFile = 'red';
     },
     fileChange(e) {
       this.existFile = 'green';
+      // console.log(e.target.files[0])
       this.form.formData = e.target.files[0];
+      this.uploadName = e.target.files[0].name;
+      console.log(e.target.files[0].name)
     },
   },
 };
@@ -282,4 +294,6 @@ export default {
   margin-top:20px
   margin-right:0%
 }
+input[type='file']
+  display none
 </style>

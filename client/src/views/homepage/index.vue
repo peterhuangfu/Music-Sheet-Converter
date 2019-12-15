@@ -1,6 +1,8 @@
 <template>
   <div>
     <el-row>
+      <div style="height:60px; backgroundColor:white;">
+      </div>
       <div class="homepage_blockone_bgcolor">
         <div class="title1">
           Sound Separation And
@@ -12,9 +14,9 @@
     </el-row>
     <el-row>
       <el-col :span="12">
-        <div class="homepage_subtitle">something here</div>
-        <div class="homepage_subtitle">something here</div>
-        <button type="primary" class="homepage_button_1">Get Started</button>
+        <div class="homepage_subtitle">convecience</div>
+        <div class="homepage_subtitle">user-friendly</div>
+        <button type="primary" class="homepage_button_1" @click="toConverter">Get Started</button>
       </el-col>
       <el-col :span="12">
         <div class="homepage_blocktwo_bgcolor"></div>
@@ -28,11 +30,14 @@
       <div style="font-size:50px; text-align:center; margin: 20px">
         Introdunction
       </div>
-      <div style="height:500px; backgroundColor:gray;"></div>
+      <div style="height:500px; backgroundColor:white; font-size:40px">
+        音樂是現代人生活不可分割的一部分，其中聽寫譜一直是音樂系的必修，在音樂領域中一直都是個技術門檻極高的技巧。
+        因此，我們希望透過人工智慧的技術，將音樂轉換成可閱讀式的五線譜，藉此降低聽寫譜的門檻需求，讓一般人都可以輕鬆達成這件事。
+      </div>
     </el-row>
     <hr style="margin:25px" />
     <el-row>
-      <div style="height:680px; backgroundColor:black;">
+      <div style="height:750px; backgroundColor:black;">
         <div
           style="font-size:50px; text-align:center; color:white; padding-top:20px"
         >
@@ -40,19 +45,17 @@
         </div>
         <el-row style="margin-top:20px">
           <el-col :span="8">
-            <div
-              style="width:200px; height:200px; backgroundColor:white; margin-left:27%"
-            ></div>
-            <div
-              style="font-size:30px; color:white;margin-left:40%;margin-top:20px"
-            >
+            <div>
+              <img src="../../picture/1.jpg" style="width:175px; height:225px; backgroundColor:white; margin-left:30%">
+            </div>
+            <div style="font-size:30px; color:white;margin-left:40%;margin-top:20px">
               蔡涵如
             </div>
           </el-col>
           <el-col :span="8">
-            <div
-              style="width:200px; height:200px; backgroundColor:white; margin-left:27%"
-            ></div>
+            <div>
+              <img src="../../picture/2.jpg" style="width:175px; height:225px; backgroundColor:white; margin-left:30%">
+            </div>
             <div
               style="font-size:30px; color:white;margin-left:42%;margin-top:20px"
             >
@@ -60,9 +63,9 @@
             </div>
           </el-col>
           <el-col :span="8">
-            <div
-              style="width:200px; height:200px; backgroundColor:white; margin-left:27%"
-            ></div>
+            <div>
+              <img src="../../picture/3.jpg" style="width:175px; height:225px; backgroundColor:white; margin-left:30%">
+            </div>
             <div
               style="font-size:30px; color:white;margin-left:40%;margin-top:20px"
             >
@@ -72,9 +75,9 @@
         </el-row>
         <el-row style="margin-top:20px">
           <el-col :span="8">
-            <div
-              style="width:200px; height:200px; backgroundColor:white; margin-left:27%"
-            ></div>
+            <div>
+              <img src="../../picture/4.jpg" style="width:175px; height:225px; backgroundColor:white; margin-left:30%">
+            </div>
             <div
               style="font-size:30px; color:white;margin-left:36%;margin-top:20px"
             >
@@ -82,9 +85,9 @@
             </div>
           </el-col>
           <el-col :span="8">
-            <div
-              style="width:200px; height:200px; backgroundColor:white; margin-left:27%"
-            ></div>
+            <div>
+              <img src="../../picture/5.jpg" style="width:175px; height:225px; backgroundColor:white; margin-left:30%">
+            </div>
             <div
               style="font-size:30px; color:white;margin-left:40%;margin-top:20px"
             >
@@ -92,9 +95,9 @@
             </div>
           </el-col>
           <el-col :span="8">
-            <div
-              style="width:200px; height:200px; backgroundColor:white; margin-left:27%"
-            ></div>
+            <div>
+              <img src="../../picture/6.jpg" style="width:175px; height:225px; backgroundColor:white; margin-left:30%">
+            </div>
             <div
               style="font-size:30px; color:white;margin-left:40%;margin-top:20px"
             >
@@ -140,7 +143,14 @@
           <div style="height:270px;backgroundColor:black;margin-top:20px"></div>
         </el-col>
         <el-col :span="20">
-          <div style="height:270px;backgroundColor:gray;margin-top:20px"></div>
+          <div style="height:270px;backgroundColor:black;margin-top:20px">
+            <div style="color:white; font-size:30px; text-align:center">
+              stacked hour glass: https://arxiv.org/pdf/1805.08559.pdf
+            </div>
+            <div style="color:white; font-size:30px; text-align:center">
+              onset and frame: https://arxiv.org/pdf/1710.11153.pdf
+            </div>
+          </div>
         </el-col>
         <el-col :span="2">
           <div style="height:270px;backgroundColor:black;margin-top:20px"></div>
@@ -168,6 +178,11 @@
 <script>
 export default {
   name: 'Homepage',
+  methods: {
+    toConverter() {
+      this.$router.push('/converter');
+    }
+  }
 };
 </script>
 <style lang="stylus" scoped>
@@ -206,7 +221,7 @@ export default {
   font-size : 35px
   margin-top : 15px
   width: 350px
-  margin-left : 28%
+  margin-left : 31%
 }
 .keyboard {
   width : 100%
