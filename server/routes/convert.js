@@ -68,45 +68,52 @@ const save_music_information = async (req, res) => {
     const file_path = req.body.file_path
     const file_name = req.body.file_name
 
-    const newWork = new Works({
-      _id: work_id,
-      file_id: this_id.toString(),
-      pdf_file_path: '',
-      sep_piano_path: '',
-      sep_human_path: '',
-      title: req.body.title,
-      description: req.body.description,
-      uploader: ObjectId(req.session.current_user._id),
-      click_times: 0,
-      download_times: 0,
-      separate: req.body.isseparate,
-      convert: req.body.isconvert,
-      public: req.body.ispublic
-    })
+    const convert_result = await call_sheep_server(req.session.current_user.username, file_path, file_name)
+    // convert_result = { success: true }
 
-    await newWork.save()
-    await User.updateOne({ google_id: req.session.current_user.google_id }, { $push: { upload_works: work_id } })
-
-    // const convert_result = await call_sheep_server(req.session.current_user.username, file_path, file_name)
-    convert_result = { success: true }
-
-    if (convert_result.success)
+    if (convert_result.success) {
+      const newWork = new Works({
+        _id: work_id,
+        file_id: this_id.toString(),
+        pdf_file_path: convert_result.pdf,
+        sep_piano_path: convert_result.others,
+        sep_human_path: convert_result.voice,
+        title: req.body.title,
+        description: req.body.description,
+        uploader: ObjectId(req.session.current_user._id),
+        click_times: 0,
+        download_times: 0,
+        separate: req.body.isseparate,
+        convert: req.body.isconvert,
+        public: req.body.ispublic
+      })
+  
+      await newWork.save()
+      await User.updateOne({ google_id: req.session.current_user.google_id }, { $push: { upload_works: work_id } })
+  
       res.status(200).json({
-        message: 'save information and convert success',
+        message: 'backend: save information and convert success & django:' + convert_result.msg,
         type: 'success'
       })
-    else
+    }
+    else {
       res.status(403).json({
-        message: 'save information and convert fail',
+        message: 'both backend and django: save information and convert fail',
         type: 'fail'
       })
+    }
+
   } catch (err) {
     console.error(err)
+    res.status(403).json({
+      message: 'failure due to unknown error',
+      type: 'fail'
+    })
   }
 }
 
 const call_sheep_server = async (user, path, file_name) => {
-  askfor_convert = request({
+  askfor_convert = await request({
     method: "POST",
     uri: "http://192.168.43.1:10000/api",
     form: {
@@ -130,4 +137,6 @@ const call_sheep_server = async (user, path, file_name) => {
   .catch(err => {
     console.error(err)
   })
+
+  return askfor_convert
 }
