@@ -21,7 +21,7 @@ exports.getPublicWorks = async (req, res) => {
           $lt: time_to, 
           $gte: time_from
         }
-      }).lean()
+      }).sort({ created_at: -1 }).lean()
     }
     else {
       all_works = await Works.find({ public: true }).lean()

@@ -14,7 +14,7 @@
       <el-menu-item index="5">Logout</el-menu-item>
     </el-menu>
     <div
-      style="position: relative; top: -45px; left: 20px; color: #4DABED; font-size: 25px;width: 500px"
+      style="position: relative; top: -45px; left: 20px; color: #494949; font-size: 25px;width: 500px"
     >
       Music Converter
     </div>

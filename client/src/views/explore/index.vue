@@ -69,7 +69,6 @@
           <template slot-scope="scope">
             <el-button
               @click.native="openPortfolio(scope.$index, scope.row)"
-              type="primary"
               size="mini"
               circle
             >
@@ -81,7 +80,6 @@
             </el-button>
             <el-button
               @click.native="downloadPortfolio(scope.$index, scope.row)"
-              type="success"
               size="mini"
               circle
             >
@@ -137,7 +135,6 @@
           <template slot-scope="scope">
             <el-button
               @click.native="downloadSepPiano(scope.$index, scope.row)"
-              type="success"
               size="mini"
               circle
             >
@@ -193,7 +190,6 @@
           <template slot-scope="scope">
             <el-button
               @click.native="downloadSepHuman(scope.$index, scope.row)"
-              type="success"
               size="mini"
               circle
             >
@@ -260,32 +256,38 @@ export default {
     }),
     public_pdfs() {
       return this.works
-              .filter(w => w.pdf_file_path !== '' && w.title.includes(this.title_filter) && w.uploader.includes(this.uploader_filter))
+              .filter(w => w.pdf_file_path !== '' && w.title.toLowerCase().includes(this.title_filter.trim().toLowerCase())
+                                                  && w.uploader.toLowerCase().includes(this.uploader_filter.trim().toLowerCase()))
               .slice(10*(this.public_pdfs_index-1), 10*(this.public_pdfs_index));
     },
     public_sep_piano() {
       return this.works
-              .filter(w => w.sep_piano_path !== '' && w.title.includes(this.title_filter) && w.uploader.includes(this.uploader_filter))
+              .filter(w => w.sep_piano_path !== '' && w.title.toLowerCase().includes(this.title_filter.trim().toLowerCase())
+                                                  && w.uploader.toLowerCase().includes(this.uploader_filter.trim().toLowerCase()))
               .slice(10*(this.public_sep_piano_index-1), 10*(this.public_sep_piano_index));
     },
     public_sep_human() {
       return this.works
-              .filter(w => w.sep_human_path !== '' && w.title.includes(this.title_filter) && w.uploader.includes(this.uploader_filter))
+              .filter(w => w.sep_human_path !== '' && w.title.toLowerCase().includes(this.title_filter.trim().toLowerCase())
+                                                  && w.uploader.toLowerCase().includes(this.uploader_filter.trim().toLowerCase()))
               .slice(10*(this.public_sep_human_index-1), 10*(this.public_sep_human_index));
     },
     pdfs_len() {
       return this.works
-              .filter(w => w.pdf_file_path !== '' && w.title.includes(this.title_filter) && w.uploader.includes(this.uploader_filter))
+              .filter(w => w.pdf_file_path !== '' && w.title.toLowerCase().includes(this.title_filter.trim().toLowerCase())
+                                                  && w.uploader.toLowerCase().includes(this.uploader_filter.trim().toLowerCase()))
               .length;
     },
     sep_piano_len() {
       return this.works
-              .filter(w => w.sep_piano_path !== '' && w.title.includes(this.title_filter) && w.uploader.includes(this.uploader_filter))
+              .filter(w => w.sep_piano_path !== '' && w.title.toLowerCase().includes(this.title_filter.trim().toLowerCase())
+                                                  && w.uploader.toLowerCase().includes(this.uploader_filter.trim().toLowerCase()))
               .length;
     },
     sep_human_len() {
       return this.works
-              .filter(w => w.sep_human_path !== '' && w.title.includes(this.title_filter) && w.uploader.includes(this.uploader_filter))
+              .filter(w => w.sep_human_path !== '' && w.title.toLowerCase().includes(this.title_filter.trim().toLowerCase())
+                                                  && w.uploader.toLowerCase().includes(this.uploader_filter.trim().toLowerCase()))
               .length;
     },
   },
@@ -365,7 +367,7 @@ export default {
 
 .explore-select-time
   border-radius 5px
-  background-color #1995DC
+  background-color #494949
   color #ffffff
   text-align center
   min-width: 50px
@@ -377,7 +379,7 @@ export default {
 
 .explore-piano-portfolio-prefix, .explore-separate-piano-prefix, .explore-separate-human-prefix
   width 10px
-  background-color #1995DC
+  background-color #494949
   min-height 34px
 
 .explore-piano-portfolio, .explore-separate-piano, .explore-separate-human
@@ -395,5 +397,5 @@ export default {
 </style>
 <style lang="stylus">
 .el-table .second-row
-  background-color: #F4FBFE
+  background-color: #F7F7F7
 </style>

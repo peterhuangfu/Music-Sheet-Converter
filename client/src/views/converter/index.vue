@@ -151,7 +151,7 @@
                   </el-switch>
                 </el-col>
                 <el-col :span="8">
-                  <div style="color: white; fontSize: 25px;">Transform</div>
+                  <div style="color: white; fontSize: 25px;">Transcribe</div>
                 </el-col>
                 <el-col :span="12">
                   <!-- <el-button
@@ -258,8 +258,8 @@ export default {
       .catch(err => {
         console.error(err)
       })
-      alert("轉譜成功！！！！")
-      this.$router.push('/homepage');
+      alert("轉譜成功！！！！");
+      this.$router.push('/profile');
     },
     clear() {
       this.form.fileTitle = '';

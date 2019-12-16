@@ -6,7 +6,10 @@ const Works = require('../models/Works')
 
 exports.get_profile = async (req, res) => {
   const current_user = req.session.current_user
-  let user = await User.findOne({ google_id: current_user.google_id }).populate("upload_works").populate("download_works").lean()
+  let user = await User.findOne({ google_id: current_user.google_id })
+                      .populate({ path: 'upload_works', options: { sort: { 'created_at': -1 } } })
+                      .populate({ path: 'download_works', options: { sort: { 'created_at': -1 } } })
+                      .lean()
 
   for (e of user.upload_works) {
     e.uploader = current_user.username

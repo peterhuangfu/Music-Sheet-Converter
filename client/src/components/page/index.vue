@@ -100,3 +100,8 @@ export default {
   margin-top 1px
   width 100vw
 </style>
+<style lang="stylus">
+button:focus {
+  outline: none
+}
+</style>

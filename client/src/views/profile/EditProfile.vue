@@ -8,11 +8,11 @@
   >
     <div class="dialog-title">Edit Profile</div>
     <div class="edit">
-      <div>Your Name:</div>
+      <div>Your User Name:</div>
       <el-input v-model="editUserName"></el-input>
     </div>
     <div class="edit">
-      <div>Your Group:(ex:A Cappella)</div>
+      <div>Your Group: ( ex: A Cappella )</div>
       <el-input v-model="editUserGroup"></el-input>
     </div>
     <div class="edit">
@@ -26,7 +26,7 @@
     <div
       style="width:228px;display:flex; justify-content:flex-end;margin:auto;margin-top:16px;"
     >
-      <el-button @click="editProfile">Confirm</el-button>
+      <el-button style="position: relative; right: 55px;" @click="editProfile">Confirm</el-button>
     </div>
   </el-dialog>
 </template>
