@@ -1,5 +1,7 @@
 <template>
   <div>
+    <div style="height:60px; backgroundColor:white;">
+      </div>
     <el-row>
       <el-col :span="9" style="background-color: white;">
         <div style="color:#BFC4CC; float: right; padding: 20px">

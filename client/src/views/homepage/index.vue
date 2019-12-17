@@ -28,7 +28,7 @@
     <hr />
     <el-row>
       <div style="font-size:50px; text-align:center; margin: 20px">
-        Introdunction
+        Introduction
       </div>
       <div style="height:500px; backgroundColor:white; font-size:40px">
         <div>音樂是現代人生活不可分割的一部分，其中聽寫譜一直是音樂系的必修，</div>
@@ -157,11 +157,11 @@
         <el-col :span="20">
           <div style="height:270px;backgroundColor:black;margin-top:20px">
             <div style="color:white; font-size:30px; text-align:center">
-              stacked hour glass: https://arxiv.org/pdf/1805.08559.pdf
+              stacked hour glass: <a style="color:white; text-decoration:none" href="https://arxiv.org/pdf/1805.08559.pdf">https://arxiv.org/pdf/1805.08559.pdf</a>
             </div>
             <hr style="margin:15px" />
             <div style="color:white; font-size:30px; text-align:center">
-              onset and frame: https://arxiv.org/pdf/1710.11153.pdf
+              onset and frame: <a style="color:white; text-decoration:none" href="https://arxiv.org/pdf/1710.11153.pdf">https://arxiv.org/pdf/1710.11153.pdf</a>
             </div>
             <hr style="margin:15px" />
           </div>
