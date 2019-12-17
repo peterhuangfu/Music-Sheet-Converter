@@ -31,8 +31,13 @@
         Introdunction
       </div>
       <div style="height:500px; backgroundColor:white; font-size:40px">
-        音樂是現代人生活不可分割的一部分，其中聽寫譜一直是音樂系的必修，在音樂領域中一直都是個技術門檻極高的技巧。
-        因此，我們希望透過人工智慧的技術，將音樂轉換成可閱讀式的五線譜，藉此降低聽寫譜的門檻需求，讓一般人都可以輕鬆達成這件事。
+        <div>音樂是現代人生活不可分割的一部分，其中聽寫譜一直是音樂系的必修，</div>
+        <hr style="margin:15px" />
+        <div>在音樂領域中一直都是個技術門檻極高的技巧。因此，我們希望透過人工</div>
+        <hr style="margin:15px" />
+        <div>智慧的技術，將音樂轉換成可閱讀式的五線譜，藉此降低聽寫譜的門檻需</div>
+        <hr style="margin:15px" />
+        <div>求，讓一般人都可以輕鬆達成這件事。</div>
       </div>
     </el-row>
     <hr style="margin:25px" />
@@ -114,7 +119,9 @@
         <div style="height:400px"></div>
       </el-col>
       <el-col :span="6">
-        <div style="height:400px;backgroundColor:gray;"></div>
+        <div>
+          <img src="../../picture/lu_small.jpg" style="width:275px; height:400px; backgroundColor:white; margin-left:10%">
+        </div>
       </el-col>
       <el-col :span="16">
         <div style="font-size:50px; text-align:center; margin:20px">
@@ -124,7 +131,12 @@
           <div style="height:290px"></div>
         </el-col>
         <el-col :span="16">
-          <div style="height:270px;backgroundColor:gray;margin-top:20px"></div>
+          <div style="font-size:30px">Associated Professor</div>
+          <hr style="margin-top:25px; margin-bottom:25px;; margin-right:25px;" />
+          <div style="font-size:30px">Department of Information Management</div>
+          <hr style="margin-top:25px; margin-bottom:25px;; margin-right:25px;" />
+          <div style="font-size:30px">National Taiwan University</div>
+          <hr style="margin-top:25px; margin-bottom:25px;; margin-right:25px;" />
         </el-col>
         <el-col :span="4">
           <div style="height:290px"></div>
@@ -147,9 +159,11 @@
             <div style="color:white; font-size:30px; text-align:center">
               stacked hour glass: https://arxiv.org/pdf/1805.08559.pdf
             </div>
+            <hr style="margin:15px" />
             <div style="color:white; font-size:30px; text-align:center">
               onset and frame: https://arxiv.org/pdf/1710.11153.pdf
             </div>
+            <hr style="margin:15px" />
           </div>
         </el-col>
         <el-col :span="2">
