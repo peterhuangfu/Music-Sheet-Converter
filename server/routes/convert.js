@@ -129,15 +129,18 @@ const call_sheep_server = async (method, user, path, file_name) => {
   askfor_convert = await request({
     method: 'POST',
     uri: 'http://localhost:10000/api',
-    form: {
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    form: JSON.stringify({
       method: method,
       path: path,
       user: user,
       file: file_name
-    },
+    }),
     json: true
   })
-  .then(res => { return res.json() })
+  // .then(res => { return res.json() })
   .then(res => {
     return {
       success: res.success,

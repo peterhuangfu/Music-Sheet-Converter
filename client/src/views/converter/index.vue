@@ -251,18 +251,26 @@ export default {
       })
 
       converting
-      .then(res => {
-        if (res.file_path !== '' && res.file_name !== ''){
-          success = true
-          this.$store.dispatch('converter/save_music_information', {
+      .then(async res => {
+        if (res.file_path !== '' && res.file_name !== '') {
+          let save_res = await this.$store.dispatch('converter/save_music_information', {
             title: this.form.fileTitle,
             description: this.form.fileDescrip,
             ispublic: this.form.isPublic,
             isseparate: this.form.isSeparate,
             isconvert: this.form.wantToTransform,
-            file_path: this.file_path,
-            file_name: this.file_name,
+            file_path: res.file_path,
+            file_name: res.file_name,
           });
+
+          if (save_res === true){
+            alert('succesful!!');
+            this.$router.push('/profile');
+          }
+          else {
+            if (fillInAll === false)
+              alert('failed. You need to fill in all blocks');
+          }
         }
         else
           return 0;
@@ -270,14 +278,6 @@ export default {
       .catch(err => {
         console.error(err)
       })
-      if (success === true){
-        alert('succesful!!');
-        this.$router.push('/profile');
-      }
-      else {
-        if (fillInAll === false)
-          alert('failed. You need to fill in all blocks');
-      }
     },
     clear() {
       this.form.fileTitle = '';

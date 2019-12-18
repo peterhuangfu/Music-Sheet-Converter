@@ -17,7 +17,7 @@ const Converter = {
     },
   },
   actions: {
-    save_music_information(
+    async save_music_information(
       { commit },
       {
         title,
@@ -29,7 +29,7 @@ const Converter = {
         file_name,
       }
     ) {
-      agent
+      await agent
         .post('convert/information' ,{
           file_path: '',
           title: title,
@@ -42,7 +42,10 @@ const Converter = {
         })
         .catch(err => {
           console.error(err);
+          return false;
         });
+      
+      return true;
     },
     async save_music_file({ commit }, file) {
       let data = new FormData();
