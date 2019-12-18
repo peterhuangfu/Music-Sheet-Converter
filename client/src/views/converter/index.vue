@@ -233,14 +233,16 @@ export default {
   methods: {
     onSubmit() {
       let success = false
+      let fillInAll = false
       const converting = new Promise(async (resolve, reject) => {
         if (this.form.fileTitle !== '' && this.form.fileDescrip !== '' && this.existFile === "green"){ 
+          fillInAll = true;
           if (this.form.isSeparate === true || this.form.wantToTransform === true){
             let result = await this.$store.dispatch('converter/save_music_file', this.form.formData);
             resolve(result);
           }
           else{
-            alert("you need to choose either separation or transcription")
+            alert('have to choose either separation or transcription');
             reject();
           }
         }
@@ -269,8 +271,12 @@ export default {
         console.error(err)
       })
       if (success === true){
-        alert("轉譜成功！！！！");
+        alert('succesful!!');
         this.$router.push('/profile');
+      }
+      else {
+        if (fillInAll === false)
+          alert('failed. You need to fill in all blocks');
       }
     },
     clear() {
