@@ -28,6 +28,7 @@ exports.convert_for_music_information = async (req, res) => {
 }
 
 const save_music_file = async (req, res) => {
+  const posi = '/service/improj2019/server/origin/' + req.session.current_user.username + '/'
   const busboy = new Busboy({
     headers: req.headers,
     limits: {
@@ -45,7 +46,10 @@ const save_music_file = async (req, res) => {
       file.resume()
     }
     else {
-      const file_path = '/Users/liuweicheng/Desktop/' + filename
+      if (!fs.existsSync(posi))
+        fs.mkdirSync(posi)
+
+      const file_path = posi + filename
       file.pipe(fs.createWriteStream(file_path))
 
       busboy.on('finish', () => {
@@ -67,8 +71,17 @@ const save_music_information = async (req, res) => {
     const this_id = works_num + 1
     const file_path = req.body.file_path
     const file_name = req.body.file_name
+    const method = req.body.isseparate && req.body.isconvert ? 'both' :
+                   req.body.isseparate && !req.body.isconvert ? 'separate' :
+                   !req.body.isseparate && req.body.isconvert ? 'convert' : 'else'
+    
+    if (method === 'else')
+      res.status(403).json({
+        message: 'choose at least one of separate or convert',
+        type: 'fail'
+      })
 
-    const convert_result = await call_sheep_server(req.session.current_user.username, file_path, file_name)
+    const convert_result = await call_sheep_server(method, req.session.current_user.username, file_path, file_name)
     // convert_result = { success: true }
 
     if (convert_result.success) {
@@ -112,12 +125,12 @@ const save_music_information = async (req, res) => {
   }
 }
 
-const call_sheep_server = async (user, path, file_name) => {
+const call_sheep_server = async (method, user, path, file_name) => {
   askfor_convert = await request({
-    method: "POST",
-    uri: "http://192.168.43.1:10000/api",
+    method: 'POST',
+    uri: 'http://localhost:10000/api',
     form: {
-      method: "both",
+      method: method,
       path: path,
       user: user,
       file: file_name

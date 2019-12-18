@@ -263,13 +263,13 @@ export default {
     public_sep_piano() {
       return this.works
               .filter(w => w.sep_piano_path !== '' && w.title.toLowerCase().includes(this.title_filter.trim().toLowerCase())
-                                                  && w.uploader.toLowerCase().includes(this.uploader_filter.trim().toLowerCase()))
+                                                   && w.uploader.toLowerCase().includes(this.uploader_filter.trim().toLowerCase()))
               .slice(10*(this.public_sep_piano_index-1), 10*(this.public_sep_piano_index));
     },
     public_sep_human() {
       return this.works
               .filter(w => w.sep_human_path !== '' && w.title.toLowerCase().includes(this.title_filter.trim().toLowerCase())
-                                                  && w.uploader.toLowerCase().includes(this.uploader_filter.trim().toLowerCase()))
+                                                   && w.uploader.toLowerCase().includes(this.uploader_filter.trim().toLowerCase()))
               .slice(10*(this.public_sep_human_index-1), 10*(this.public_sep_human_index));
     },
     pdfs_len() {
@@ -281,13 +281,13 @@ export default {
     sep_piano_len() {
       return this.works
               .filter(w => w.sep_piano_path !== '' && w.title.toLowerCase().includes(this.title_filter.trim().toLowerCase())
-                                                  && w.uploader.toLowerCase().includes(this.uploader_filter.trim().toLowerCase()))
+                                                   && w.uploader.toLowerCase().includes(this.uploader_filter.trim().toLowerCase()))
               .length;
     },
     sep_human_len() {
       return this.works
               .filter(w => w.sep_human_path !== '' && w.title.toLowerCase().includes(this.title_filter.trim().toLowerCase())
-                                                  && w.uploader.toLowerCase().includes(this.uploader_filter.trim().toLowerCase()))
+                                                   && w.uploader.toLowerCase().includes(this.uploader_filter.trim().toLowerCase()))
               .length;
     },
   },
