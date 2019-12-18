@@ -27,6 +27,7 @@
                         id="file-upload"
                         type="file"
                         name="file"
+                        accept=".wav, .mp3"
                       />
                       <div>
                         <img src="../../picture/uploadPic.jpeg" style="width:300px; height:300px">
@@ -231,10 +232,17 @@ export default {
   },
   methods: {
     onSubmit() {
+      let success = false
       const converting = new Promise(async (resolve, reject) => {
         if (this.form.fileTitle !== '' && this.form.fileDescrip !== '' && this.existFile === "green"){ 
-          let result = await this.$store.dispatch('converter/save_music_file', this.form.formData);
-          resolve(result);
+          if (this.form.isSeparate === true || this.form.wantToTransform === true){
+            let result = await this.$store.dispatch('converter/save_music_file', this.form.formData);
+            resolve(result);
+          }
+          else{
+            alert("you need to choose either separation or transcription")
+            reject();
+          }
         }
         else
           reject();
@@ -242,7 +250,8 @@ export default {
 
       converting
       .then(res => {
-        if (res.file_path !== '' && res.file_name !== '')
+        if (res.file_path !== '' && res.file_name !== ''){
+          success = true
           this.$store.dispatch('converter/save_music_information', {
             title: this.form.fileTitle,
             description: this.form.fileDescrip,
@@ -252,14 +261,17 @@ export default {
             file_path: this.file_path,
             file_name: this.file_name,
           });
+        }
         else
           return 0;
       })
       .catch(err => {
         console.error(err)
       })
-      alert("轉譜成功！！！！");
-      this.$router.push('/profile');
+      if (success === true){
+        alert("轉譜成功！！！！");
+        this.$router.push('/profile');
+      }
     },
     clear() {
       this.form.fileTitle = '';
