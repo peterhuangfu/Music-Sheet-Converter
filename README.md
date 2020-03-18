@@ -1,4 +1,4 @@
-# Music Sheet Converter
+# Sheet Music Converter
 ### 專題指導教授：盧信銘
 ### 成員
 鄭揚 | 林建鋐 | 皇甫立翔 | 劉韋成 | 蔡涵如 | 顏价廷  
@@ -18,18 +18,18 @@
 #### Installation
 ```
 git clone
-cd Music-Sheet-Converter/client && npm install
+cd Sheet-Music-Converter/client && npm install
 cd ../server && npm install
 ```
 #### Run
 Front End
 ```
-cd Music-Sheet-Converter/client
+cd Sheet-Music-Converter/client
 npm run serve
 ```
 Back End
 ```
-cd Music-Sheet-Converter/server
+cd Sheet-Music-Converter/server
 node develop.js
 ```
 
