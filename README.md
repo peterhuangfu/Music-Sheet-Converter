@@ -8,9 +8,9 @@
 
 因此，我們希望透過人工智慧的技術，將音樂轉換成可閱讀式的五線譜，藉此降低聽寫譜的門檻需求，讓一般人都可以輕鬆地達成這件事。  
 
-系統呈現：Vue.js + Node.js + MongoDB  
+系統呈現：Vue.js + Node.js + Django + MongoDB  
 
-音源分離 & 鋼琴轉譜：Python + Django
+音源分離 & 鋼琴轉譜：Deep Learning Technique
 * Music Seperation：Stacked Hourglass Model
 * Music Transcription：Onset-and-Frames Model
 
