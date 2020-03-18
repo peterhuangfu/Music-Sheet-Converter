@@ -18,10 +18,8 @@
 #### Installation
 ```
 git clone
-cd Music-Sheet-Converter/client
-npm install
-cd ../server
-npm install
+cd Music-Sheet-Converter/client && npm install
+cd ../server && npm install
 ```
 #### Run
 Front End
