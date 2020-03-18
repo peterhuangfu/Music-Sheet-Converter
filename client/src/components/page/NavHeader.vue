@@ -16,7 +16,7 @@
     <div
       style="position: relative; top: -45px; left: 20px; color: #494949; font-size: 25px;width: 500px"
     >
-      Music Converter
+      Sheet Music Converter
     </div>
   </div>
 </template>
