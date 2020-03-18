@@ -18,7 +18,7 @@
 #### Installation
 ```
 git clone
-cd sheet-converter/client
+cd Music-Sheet-Converter/client
 npm install
 cd ../server
 npm install
@@ -26,12 +26,12 @@ npm install
 #### Run
 Front End
 ```
-cd sheet-converter/client
+cd Music-Sheet-Converter/client
 npm run serve
 ```
 Back End
 ```
-cd sheet-converter/server
+cd Music-Sheet-Converter/server
 node develop.js
 ```
 
