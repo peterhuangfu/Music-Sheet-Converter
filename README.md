@@ -1,4 +1,4 @@
-# Sheet Music Converter
+# Independent Study - Sheet Music Converter
 ### 專題指導教授：盧信銘
 ### 成員
 鄭揚 | 林建鋐 | 皇甫立翔 | 劉韋成 | 蔡涵如 | 顏价廷  
